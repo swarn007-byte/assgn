@@ -1,0 +1,119 @@
+"""Compare the same checkpoint in fresh CPU llama-server processes."""
+from contextlib import contextmanager
+import json
+from pathlib import Path
+from socket import socket
+from statistics import median
+import subprocess
+import time
+from urllib.error import URLError
+from urllib.request import Request, urlopen
+
+HERE = Path(__file__).resolve().parent
+CACHE = HERE.parent / ".cache"
+SERVER = CACHE / "llama-b12359/llama-server"
+KEYS = ("f16", "q4_0")
+PROMPTS = [
+    ("To initialize an empty Git repository, run", ["git init"]),
+    ("To find out which files have changed, run", ["git status"]),
+    ("To stage the file README.md, run", ["git add README.md"]),
+    ("To view the commit history, run", ["git log"]),
+    ("To create a new branch named demo without switching to it, run", ["git branch demo"]),
+    ("To temporarily store uncommitted changes, run", ["git stash"]),
+    ("To download data from origin without merging, run", ["git fetch origin"]),
+    ("To show the difference between the index and the previous commit, run",
+     ["git diff --cached", "git diff --staged"]),
+    ("To list the remotes along with their URLs, run", ["git remote -v"]),
+    ("To save the staged snapshot with the message Fix login, run",
+     ["git commit -m", "fix login"]),
+]
+
+
+def request(endpoint, route, data=None):
+    if data is not None:
+        data = json.dumps(data).encode()
+    req = Request(endpoint + route, data=data, headers={"Content-Type": "application/json"})
+    with urlopen(req, timeout=15) as response:
+        return json.load(response)
+
+
+@contextmanager
+def start(key):
+    with socket() as sock:
+        sock.bind(("127.0.0.1", 0))
+        port = sock.getsockname()[1]
+    endpoint = f"http://127.0.0.1:{port}"
+    with (CACHE / f"server-{key}.log").open("w") as log:
+        with subprocess.Popen([
+            str(SERVER), "-m", str(CACHE / f"progit-{key}.gguf"),
+            "--host", "127.0.0.1", "--port", str(port), "-t", "4", "-tb", "4",
+            "-ngl", "0", "-c", "1024", "-np", "1", "--cache-ram", "0", "--no-ui",
+        ], stdout=log, stderr=log) as server:
+            try:
+                for _ in range(100):
+                    if server.poll() is not None:
+                        raise RuntimeError(f"llama-server quit. See {log.name}")
+                    try:
+                        if request(endpoint, "/health")["status"] == "ok":
+                            break
+                    except (URLError, TimeoutError):
+                        time.sleep(0.1)
+                else:
+                    raise TimeoutError(f"llama-server never became ready. See {log.name}")
+                yield endpoint, server.pid
+            finally:
+                server.terminate()
+                try:
+                    server.wait(timeout=5)
+                except subprocess.TimeoutExpired:
+                    server.kill()
+                    server.wait()
+
+
+def complete(endpoint, prompt):
+    return request(endpoint, "/completion", {
+        "prompt": prompt, "n_predict": 32, "ignore_eos": True, "temperature": 0,
+        "seed": 713, "cache_prompt": False,
+    })
+
+
+def peak_rss(pid):
+    status = Path(f"/proc/{pid}/status").read_text()
+    return int(next(line for line in status.splitlines() if line.startswith("VmHWM:")).split()[1])
+
+
+def main():
+    from transformers import AutoTokenizer
+
+    tokenizer = AutoTokenizer.from_pretrained(CACHE / "base")
+    results = {}
+    for key in KEYS:
+        rows = []
+        with start(key) as (endpoint, pid):
+            for prompt, expected in PROMPTS:
+                ids = request(endpoint, "/tokenize", {"content": prompt, "add_special": False})["tokens"]
+                assert ids == tokenizer.encode(prompt, add_special_tokens=False), (key, prompt)
+            complete(endpoint, "Git tracks changes to files.")
+            for prompt, expected in PROMPTS:
+                response = complete(endpoint, prompt)
+                timings = response["timings"]
+                assert timings["predicted_n"] == 32 and timings["predicted_ms"] > 0, timings
+                rows.append({
+                    "prompt": prompt, "expected_fragments": expected,
+                    "output": response["content"], "timings": timings,
+                    "contains_expected": all(fragment.lower() in response["content"].lower()
+                                             for fragment in expected),
+                })
+            results[key] = {
+                "file_bytes": (CACHE / f"progit-{key}.gguf").stat().st_size,
+                "peak_rss_kib": peak_rss(pid),
+                "median_decode_tokens_per_second": median(r["timings"]["predicted_per_second"] for r in rows),
+                "samples": rows,
+            }
+    (HERE / "results.json").write_text(json.dumps(results, ensure_ascii=False, indent=2) + "\n")
+    print({key: {k: v for k, v in result.items() if k != "samples"}
+           for key, result in results.items()})
+
+
+if __name__ == "__main__":
+    main()
