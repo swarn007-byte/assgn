@@ -1,29 +1,29 @@
 {
   "seed": 713,
-  "train_count": 144,
+  "train_count": 336,
   "test_count": 60,
-  "trainable_parameters": 14336,
-  "total_parameters": 1326208,
+  "trainable_parameters": 28672,
+  "total_parameters": 1340544,
   "rank": 8,
   "alpha": 16,
-  "learning_rate": 0.003,
-  "epochs": 8,
+  "learning_rate": 0.002,
+  "epochs": 6,
   "targets": [
     "q_proj",
-    "v_proj"
+    "k_proj",
+    "v_proj",
+    "o_proj"
   ],
   "epoch_losses": [
-    1.5973086754480998,
-    1.1194232205549877,
-    0.626085082689921,
-    0.272880124549071,
-    0.11406490051498015,
-    0.0577563876286149,
-    0.0278259312423567,
-    0.017682212637737393
+    1.3409563856465476,
+    0.45516213960945606,
+    0.0447194275246667,
+    0.04087397694820538,
+    0.02812036994146183,
+    0.014373451001509758
   ],
   "base_correct": 8,
-  "lora_correct": 31,
+  "lora_correct": 41,
   "examples": [
     {
       "request": "Put the latest edits to settings.toml in the index.",
@@ -65,7 +65,7 @@
       "request": "Queue layout.css up for the snapshot without making the snapshot yet.",
       "label": "A",
       "base": "C",
-      "lora": "D"
+      "lora": "A"
     },
     {
       "request": "Queue Dockerfile up for the snapshot without making the snapshot yet.",
@@ -77,7 +77,7 @@
       "request": "Queue report.md up for the snapshot without making the snapshot yet.",
       "label": "A",
       "base": "C",
-      "lora": "B"
+      "lora": "A"
     },
     {
       "request": "Queue test_cli.py up for the snapshot without making the snapshot yet.",
@@ -89,37 +89,37 @@
       "request": "Can we include settings.toml in what will be saved next?",
       "label": "A",
       "base": "C",
-      "lora": "C"
+      "lora": "A"
     },
     {
       "request": "Can we include layout.css in what will be saved next?",
       "label": "A",
       "base": "C",
-      "lora": "C"
+      "lora": "A"
     },
     {
       "request": "Can we include Dockerfile in what will be saved next?",
       "label": "A",
       "base": "C",
-      "lora": "C"
+      "lora": "A"
     },
     {
       "request": "Can we include report.md in what will be saved next?",
       "label": "A",
       "base": "C",
-      "lora": "C"
+      "lora": "A"
     },
     {
       "request": "Can we include test_cli.py in what will be saved next?",
       "label": "A",
       "base": "C",
-      "lora": "B"
+      "lora": "A"
     },
     {
       "request": "Write the prepared changes to history and describe them as handle retries.",
       "label": "B",
       "base": "A",
-      "lora": "B"
+      "lora": "D"
     },
     {
       "request": "Write the prepared changes to history and describe them as tighten scope.",
@@ -131,31 +131,31 @@
       "request": "Write the prepared changes to history and describe them as correct totals.",
       "label": "B",
       "base": "A",
-      "lora": "B"
+      "lora": "C"
     },
     {
       "request": "Write the prepared changes to history and describe them as polish help.",
       "label": "B",
       "base": "A",
-      "lora": "B"
+      "lora": "A"
     },
     {
       "request": "Write the prepared changes to history and describe them as remove dead paths.",
       "label": "B",
       "base": "C",
-      "lora": "B"
+      "lora": "A"
     },
     {
       "request": "Turn the pending snapshot into a permanent revision titled handle retries.",
       "label": "B",
       "base": "C",
-      "lora": "C"
+      "lora": "A"
     },
     {
       "request": "Turn the pending snapshot into a permanent revision titled tighten scope.",
       "label": "B",
       "base": "C",
-      "lora": "C"
+      "lora": "B"
     },
     {
       "request": "Turn the pending snapshot into a permanent revision titled correct totals.",
@@ -167,7 +167,7 @@
       "request": "Turn the pending snapshot into a permanent revision titled polish help.",
       "label": "B",
       "base": "A",
-      "lora": "C"
+      "lora": "B"
     },
     {
       "request": "Turn the pending snapshot into a permanent revision titled remove dead paths.",
@@ -179,31 +179,31 @@
       "request": "I want the staged work saved under the message handle retries.",
       "label": "B",
       "base": "A",
-      "lora": "B"
+      "lora": "D"
     },
     {
       "request": "I want the staged work saved under the message tighten scope.",
       "label": "B",
       "base": "A",
-      "lora": "B"
+      "lora": "D"
     },
     {
       "request": "I want the staged work saved under the message correct totals.",
       "label": "B",
       "base": "A",
-      "lora": "B"
+      "lora": "D"
     },
     {
       "request": "I want the staged work saved under the message polish help.",
       "label": "B",
       "base": "A",
-      "lora": "B"
+      "lora": "D"
     },
     {
       "request": "I want the staged work saved under the message remove dead paths.",
       "label": "B",
       "base": "A",
-      "lora": "B"
+      "lora": "A"
     },
     {
       "request": "Give me a new development line named receipt.",
@@ -239,13 +239,13 @@
       "request": "Set up receipt as an independent line starting from here.",
       "label": "C",
       "base": "C",
-      "lora": "B"
+      "lora": "C"
     },
     {
       "request": "Set up layout-v2 as an independent line starting from here.",
       "label": "C",
       "base": "A",
-      "lora": "C"
+      "lora": "D"
     },
     {
       "request": "Set up perf-pass as an independent line starting from here.",
@@ -257,55 +257,55 @@
       "request": "Set up tooling as an independent line starting from here.",
       "label": "C",
       "base": "A",
-      "lora": "B"
+      "lora": "C"
     },
     {
       "request": "Set up search as an independent line starting from here.",
       "label": "C",
       "base": "A",
-      "lora": "B"
+      "lora": "C"
     },
     {
       "request": "Open receipt so I can keep this work separate.",
       "label": "C",
       "base": "A",
-      "lora": "B"
+      "lora": "D"
     },
     {
       "request": "Open layout-v2 so I can keep this work separate.",
       "label": "C",
       "base": "A",
-      "lora": "A"
+      "lora": "D"
     },
     {
       "request": "Open perf-pass so I can keep this work separate.",
       "label": "C",
       "base": "A",
-      "lora": "A"
+      "lora": "D"
     },
     {
       "request": "Open tooling so I can keep this work separate.",
       "label": "C",
       "base": "A",
-      "lora": "A"
+      "lora": "D"
     },
     {
       "request": "Open search so I can keep this work separate.",
       "label": "C",
       "base": "A",
-      "lora": "A"
+      "lora": "D"
     },
     {
       "request": "Make the revisions I just saved available on lab.",
       "label": "D",
       "base": "A",
-      "lora": "A"
+      "lora": "D"
     },
     {
       "request": "Make the revisions I just saved available on backup.",
       "label": "D",
       "base": "A",
-      "lora": "B"
+      "lora": "D"
     },
     {
       "request": "Make the revisions I just saved available on company.",
@@ -335,25 +335,25 @@
       "request": "Sync my outgoing changes to the server named backup.",
       "label": "D",
       "base": "C",
-      "lora": "B"
+      "lora": "D"
     },
     {
       "request": "Sync my outgoing changes to the server named company.",
       "label": "D",
       "base": "C",
-      "lora": "B"
+      "lora": "D"
     },
     {
       "request": "Sync my outgoing changes to the server named review.",
       "label": "D",
       "base": "C",
-      "lora": "B"
+      "lora": "D"
     },
     {
       "request": "Sync my outgoing changes to the server named archive.",
       "label": "D",
       "base": "C",
-      "lora": "B"
+      "lora": "A"
     },
     {
       "request": "Forward what I have locally to the shared repo at lab.",
@@ -371,19 +371,19 @@
       "request": "Forward what I have locally to the shared repo at company.",
       "label": "D",
       "base": "C",
-      "lora": "A"
+      "lora": "D"
     },
     {
       "request": "Forward what I have locally to the shared repo at review.",
       "label": "D",
       "base": "A",
-      "lora": "A"
+      "lora": "D"
     },
     {
       "request": "Forward what I have locally to the shared repo at archive.",
       "label": "D",
       "base": "C",
-      "lora": "A"
+      "lora": "D"
     }
   ]
 }
