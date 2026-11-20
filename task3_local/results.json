@@ -1,400 +1,854 @@
 {
   "f16": {
     "file_bytes": 2757472,
-    "peak_rss_kib": 27964,
-    "median_decode_tokens_per_second": 6044.131516214965,
+    "peak_rss_kib": 27928,
+    "timing_runs": [
+      [
+        {
+          "cache_n": 0,
+          "prompt_n": 9,
+          "prompt_ms": 0.41,
+          "prompt_per_token_ms": 0.04555555555555555,
+          "prompt_per_second": 21951.219512195123,
+          "predicted_n": 32,
+          "predicted_ms": 3.481,
+          "predicted_per_token_ms": 0.11229032258064515,
+          "predicted_per_second": 8905.486929043378
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 9,
+          "prompt_ms": 0.425,
+          "prompt_per_token_ms": 0.04722222222222222,
+          "prompt_per_second": 21176.470588235294,
+          "predicted_n": 32,
+          "predicted_ms": 3.56,
+          "predicted_per_token_ms": 0.11483870967741935,
+          "predicted_per_second": 8707.865168539325
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 9,
+          "prompt_ms": 0.384,
+          "prompt_per_token_ms": 0.042666666666666665,
+          "prompt_per_second": 23437.5,
+          "predicted_n": 32,
+          "predicted_ms": 4.082,
+          "predicted_per_token_ms": 0.1316774193548387,
+          "predicted_per_second": 7594.316511513964
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 7,
+          "prompt_ms": 0.661,
+          "prompt_per_token_ms": 0.09442857142857143,
+          "prompt_per_second": 10590.01512859304,
+          "predicted_n": 32,
+          "predicted_ms": 5.317,
+          "predicted_per_token_ms": 0.17151612903225807,
+          "predicted_per_second": 5830.355463607297
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 15,
+          "prompt_ms": 0.735,
+          "prompt_per_token_ms": 0.049,
+          "prompt_per_second": 20408.163265306124,
+          "predicted_n": 32,
+          "predicted_ms": 27.272,
+          "predicted_per_token_ms": 0.8797419354838709,
+          "predicted_per_second": 1136.6969785860956
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 10,
+          "prompt_ms": 0.53,
+          "prompt_per_token_ms": 0.053000000000000005,
+          "prompt_per_second": 18867.924528301886,
+          "predicted_n": 32,
+          "predicted_ms": 4.01,
+          "predicted_per_token_ms": 0.1293548387096774,
+          "predicted_per_second": 7730.673316708229
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 9,
+          "prompt_ms": 0.481,
+          "prompt_per_token_ms": 0.05344444444444444,
+          "prompt_per_second": 18711.01871101871,
+          "predicted_n": 32,
+          "predicted_ms": 4.044,
+          "predicted_per_token_ms": 0.1304516129032258,
+          "predicted_per_second": 7665.6775469831855
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 13,
+          "prompt_ms": 0.437,
+          "prompt_per_token_ms": 0.033615384615384616,
+          "prompt_per_second": 29748.283752860414,
+          "predicted_n": 32,
+          "predicted_ms": 3.997,
+          "predicted_per_token_ms": 0.12893548387096773,
+          "predicted_per_second": 7755.816862646985
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 10,
+          "prompt_ms": 0.401,
+          "prompt_per_token_ms": 0.040100000000000004,
+          "prompt_per_second": 24937.65586034913,
+          "predicted_n": 32,
+          "predicted_ms": 4.164,
+          "predicted_per_token_ms": 0.13432258064516128,
+          "predicted_per_second": 7444.764649375601
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 13,
+          "prompt_ms": 0.428,
+          "prompt_per_token_ms": 0.03292307692307692,
+          "prompt_per_second": 30373.831775700935,
+          "predicted_n": 32,
+          "predicted_ms": 3.727,
+          "predicted_per_token_ms": 0.1202258064516129,
+          "predicted_per_second": 8317.681781593776
+        }
+      ],
+      [
+        {
+          "cache_n": 0,
+          "prompt_n": 9,
+          "prompt_ms": 0.422,
+          "prompt_per_token_ms": 0.04688888888888889,
+          "prompt_per_second": 21327.014218009477,
+          "predicted_n": 32,
+          "predicted_ms": 4.586,
+          "predicted_per_token_ms": 0.14793548387096775,
+          "predicted_per_second": 6759.703445268207
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 9,
+          "prompt_ms": 0.722,
+          "prompt_per_token_ms": 0.08022222222222222,
+          "prompt_per_second": 12465.373961218836,
+          "predicted_n": 32,
+          "predicted_ms": 4.721,
+          "predicted_per_token_ms": 0.15229032258064518,
+          "predicted_per_second": 6566.405422579962
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 9,
+          "prompt_ms": 0.498,
+          "prompt_per_token_ms": 0.05533333333333333,
+          "prompt_per_second": 18072.289156626506,
+          "predicted_n": 32,
+          "predicted_ms": 4.213,
+          "predicted_per_token_ms": 0.13590322580645162,
+          "predicted_per_second": 7358.177070970804
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 7,
+          "prompt_ms": 0.407,
+          "prompt_per_token_ms": 0.05814285714285714,
+          "prompt_per_second": 17199.0171990172,
+          "predicted_n": 32,
+          "predicted_ms": 4.328,
+          "predicted_per_token_ms": 0.13961290322580647,
+          "predicted_per_second": 7162.661737523105
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 15,
+          "prompt_ms": 0.663,
+          "prompt_per_token_ms": 0.0442,
+          "prompt_per_second": 22624.434389140268,
+          "predicted_n": 32,
+          "predicted_ms": 6.305,
+          "predicted_per_token_ms": 0.20338709677419353,
+          "predicted_per_second": 4916.732751784299
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 10,
+          "prompt_ms": 0.42,
+          "prompt_per_token_ms": 0.041999999999999996,
+          "prompt_per_second": 23809.523809523813,
+          "predicted_n": 32,
+          "predicted_ms": 4.041,
+          "predicted_per_token_ms": 0.13035483870967743,
+          "predicted_per_second": 7671.368473150209
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 9,
+          "prompt_ms": 0.489,
+          "prompt_per_token_ms": 0.05433333333333333,
+          "prompt_per_second": 18404.907975460123,
+          "predicted_n": 32,
+          "predicted_ms": 4.539,
+          "predicted_per_token_ms": 0.14641935483870966,
+          "predicted_per_second": 6829.698171403394
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 13,
+          "prompt_ms": 0.604,
+          "prompt_per_token_ms": 0.04646153846153846,
+          "prompt_per_second": 21523.17880794702,
+          "predicted_n": 32,
+          "predicted_ms": 4.453,
+          "predicted_per_token_ms": 0.1436451612903226,
+          "predicted_per_second": 6961.598922075005
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 10,
+          "prompt_ms": 0.494,
+          "prompt_per_token_ms": 0.0494,
+          "prompt_per_second": 20242.914979757086,
+          "predicted_n": 32,
+          "predicted_ms": 4.604,
+          "predicted_per_token_ms": 0.14851612903225805,
+          "predicted_per_second": 6733.275412684621
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 13,
+          "prompt_ms": 0.554,
+          "prompt_per_token_ms": 0.04261538461538462,
+          "prompt_per_second": 23465.703971119132,
+          "predicted_n": 32,
+          "predicted_ms": 4.521,
+          "predicted_per_token_ms": 0.14583870967741935,
+          "predicted_per_second": 6856.890068568901
+        }
+      ],
+      [
+        {
+          "cache_n": 0,
+          "prompt_n": 9,
+          "prompt_ms": 0.455,
+          "prompt_per_token_ms": 0.050555555555555555,
+          "prompt_per_second": 19780.21978021978,
+          "predicted_n": 32,
+          "predicted_ms": 4.396,
+          "predicted_per_token_ms": 0.14180645161290323,
+          "predicted_per_second": 7051.865332120109
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 9,
+          "prompt_ms": 0.395,
+          "prompt_per_token_ms": 0.043888888888888894,
+          "prompt_per_second": 22784.810126582277,
+          "predicted_n": 32,
+          "predicted_ms": 4.416,
+          "predicted_per_token_ms": 0.1424516129032258,
+          "predicted_per_second": 7019.927536231883
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 9,
+          "prompt_ms": 0.418,
+          "prompt_per_token_ms": 0.04644444444444444,
+          "prompt_per_second": 21531.100478468903,
+          "predicted_n": 32,
+          "predicted_ms": 4.916,
+          "predicted_per_token_ms": 0.15858064516129033,
+          "predicted_per_second": 6305.93978844589
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 7,
+          "prompt_ms": 0.413,
+          "prompt_per_token_ms": 0.059,
+          "prompt_per_second": 16949.15254237288,
+          "predicted_n": 32,
+          "predicted_ms": 4.61,
+          "predicted_per_token_ms": 0.14870967741935484,
+          "predicted_per_second": 6724.511930585682
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 15,
+          "prompt_ms": 0.655,
+          "prompt_per_token_ms": 0.043666666666666666,
+          "prompt_per_second": 22900.763358778626,
+          "predicted_n": 32,
+          "predicted_ms": 4.777,
+          "predicted_per_token_ms": 0.1540967741935484,
+          "predicted_per_second": 6489.42851161817
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 10,
+          "prompt_ms": 0.583,
+          "prompt_per_token_ms": 0.0583,
+          "prompt_per_second": 17152.658662092625,
+          "predicted_n": 32,
+          "predicted_ms": 4.586,
+          "predicted_per_token_ms": 0.14793548387096775,
+          "predicted_per_second": 6759.703445268207
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 9,
+          "prompt_ms": 0.499,
+          "prompt_per_token_ms": 0.05544444444444444,
+          "prompt_per_second": 18036.072144288577,
+          "predicted_n": 32,
+          "predicted_ms": 4.575,
+          "predicted_per_token_ms": 0.14758064516129032,
+          "predicted_per_second": 6775.956284153005
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 13,
+          "prompt_ms": 0.589,
+          "prompt_per_token_ms": 0.045307692307692306,
+          "prompt_per_second": 22071.30730050934,
+          "predicted_n": 32,
+          "predicted_ms": 4.651,
+          "predicted_per_token_ms": 0.15003225806451612,
+          "predicted_per_second": 6665.233283164911
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 10,
+          "prompt_ms": 0.503,
+          "prompt_per_token_ms": 0.0503,
+          "prompt_per_second": 19880.715705765408,
+          "predicted_n": 32,
+          "predicted_ms": 4.538,
+          "predicted_per_token_ms": 0.14638709677419356,
+          "predicted_per_second": 6831.203173204054
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 13,
+          "prompt_ms": 0.573,
+          "prompt_per_token_ms": 0.044076923076923076,
+          "prompt_per_second": 22687.60907504363,
+          "predicted_n": 32,
+          "predicted_ms": 4.678,
+          "predicted_per_token_ms": 0.1509032258064516,
+          "predicted_per_second": 6626.763574176999
+        }
+      ]
+    ],
     "samples": [
       {
         "prompt": "To initialize an empty Git repository, run",
-        "expected_fragments": [
+        "accepted_commands": [
           "git init"
         ],
-        "output": " git commit -am 'Add limit to log function' [featureA 3300904] Add limit to log function 1 files changed, 1 insertions(+), 1 deletions",
-        "timings": {
-          "cache_n": 0,
-          "prompt_n": 9,
-          "prompt_ms": 0.439,
-          "prompt_per_token_ms": 0.04877777777777778,
-          "prompt_per_second": 20501.13895216401,
-          "predicted_n": 32,
-          "predicted_ms": 6.914,
-          "predicted_per_token_ms": 0.22303225806451613,
-          "predicted_per_second": 4483.656349435928
-        },
-        "contains_expected": false
+        "output": " git init",
+        "contains_expected": true
       },
       {
         "prompt": "To find out which files have changed, run",
-        "expected_fragments": [
+        "accepted_commands": [
           "git status"
         ],
-        "output": ", but it will only show you the default branch. The git show command is used to show you all the commits that are not in the same commit. The",
-        "timings": {
-          "cache_n": 0,
-          "prompt_n": 9,
-          "prompt_ms": 5.561,
-          "prompt_per_token_ms": 0.6178888888888889,
-          "prompt_per_second": 1618.4139543247618,
-          "predicted_n": 32,
-          "predicted_ms": 12.422,
-          "predicted_per_token_ms": 0.40070967741935487,
-          "predicted_per_second": 2495.5723715987765
-        },
-        "contains_expected": false
+        "output": " git status",
+        "contains_expected": true
       },
       {
         "prompt": "To stage the file README.md, run",
-        "expected_fragments": [
+        "accepted_commands": [
           "git add README.md"
         ],
-        "output": " git commit -am 'Add limit to log function' [featureA 3300904] Add limit to log function 1 files changed, 1 insertions(+), 1 deletions",
-        "timings": {
-          "cache_n": 0,
-          "prompt_n": 9,
-          "prompt_ms": 0.472,
-          "prompt_per_token_ms": 0.05244444444444444,
-          "prompt_per_second": 19067.79661016949,
-          "predicted_n": 32,
-          "predicted_ms": 5.658,
-          "predicted_per_token_ms": 0.18251612903225808,
-          "predicted_per_second": 5478.967833156593
-        },
+        "output": " git add ARCHITECTURE.md",
         "contains_expected": false
       },
       {
         "prompt": "To view the commit history, run",
-        "expected_fragments": [
+        "accepted_commands": [
           "git log"
         ],
-        "output": " git commit -am 'Add limit to log function' [featureA 3300904] Add limit to log function 1 files changed, 1 insertions(+), 1 deletions",
-        "timings": {
-          "cache_n": 0,
-          "prompt_n": 7,
-          "prompt_ms": 0.579,
-          "prompt_per_token_ms": 0.08271428571428571,
-          "prompt_per_second": 12089.810017271158,
-          "predicted_n": 32,
-          "predicted_ms": 5.183,
-          "predicted_per_token_ms": 0.16719354838709677,
-          "predicted_per_second": 5981.092031641907
-        },
-        "contains_expected": false
+        "output": " git log",
+        "contains_expected": true
       },
       {
         "prompt": "To create a new branch named demo without switching to it, run",
-        "expected_fragments": [
+        "accepted_commands": [
           "git branch demo"
         ],
-        "output": " git log --oneline --graph --decorate * 75e059dd55d55d55d55d3f3a (HEAD, master) Update copy",
-        "timings": {
-          "cache_n": 0,
-          "prompt_n": 15,
-          "prompt_ms": 0.672,
-          "prompt_per_token_ms": 0.0448,
-          "prompt_per_second": 22321.428571428572,
-          "predicted_n": 32,
-          "predicted_ms": 5.076,
-          "predicted_per_token_ms": 0.16374193548387095,
-          "predicted_per_second": 6107.171000788023
-        },
+        "output": " git branch feature",
         "contains_expected": false
       },
       {
         "prompt": "To temporarily store uncommitted changes, run",
-        "expected_fragments": [
+        "accepted_commands": [
           "git stash"
         ],
-        "output": " git commit -am 'AForceptions, \"git-filter\"=>[\"git-path\"].exclude hello() ## hello.rb index.",
-        "timings": {
-          "cache_n": 0,
-          "prompt_n": 10,
-          "prompt_ms": 0.498,
-          "prompt_per_token_ms": 0.0498,
-          "prompt_per_second": 20080.321285140562,
-          "predicted_n": 32,
-          "predicted_ms": 4.647,
-          "predicted_per_token_ms": 0.14990322580645163,
-          "predicted_per_second": 6670.970518614159
-        },
-        "contains_expected": false
+        "output": " git stash",
+        "contains_expected": true
       },
       {
         "prompt": "To download data from origin without merging, run",
-        "expected_fragments": [
+        "accepted_commands": [
           "git fetch origin"
         ],
-        "output": " git-path/etc/gitconfig.external file = \"git diff --git a/config.external \"Ailes\" <gptions> <",
-        "timings": {
-          "cache_n": 0,
-          "prompt_n": 9,
-          "prompt_ms": 0.486,
-          "prompt_per_token_ms": 0.054,
-          "prompt_per_second": 18518.518518518522,
-          "predicted_n": 32,
-          "predicted_ms": 4.869,
-          "predicted_per_token_ms": 0.15706451612903224,
-          "predicted_per_second": 6366.810433353872
-        },
-        "contains_expected": false
+        "output": " git fetch origin",
+        "contains_expected": true
       },
       {
         "prompt": "To show the difference between the index and the previous commit, run",
-        "expected_fragments": [
+        "accepted_commands": [
           "git diff --cached",
           "git diff --staged"
         ],
-        "output": " git show --continue.count option is the “unmatch option for the previous commit. The git show command is used to show you the commits that are",
-        "timings": {
-          "cache_n": 0,
-          "prompt_n": 13,
-          "prompt_ms": 0.483,
-          "prompt_per_token_ms": 0.037153846153846155,
-          "prompt_per_second": 26915.113871635614,
-          "predicted_n": 32,
-          "predicted_ms": 4.406,
-          "predicted_per_token_ms": 0.1421290322580645,
-          "predicted_per_second": 7035.860190649115
-        },
+        "output": " git add index.html",
         "contains_expected": false
       },
       {
         "prompt": "To list the remotes along with their URLs, run",
-        "expected_fragments": [
+        "accepted_commands": [
           "git remote -v"
         ],
-        "output": " git-tree, which looks for files in detail in detail in detail in detail in detail in detail in detail in detail in detail in detail in Remotes and",
-        "timings": {
-          "cache_n": 0,
-          "prompt_n": 10,
-          "prompt_ms": 0.474,
-          "prompt_per_token_ms": 0.0474,
-          "prompt_per_second": 21097.04641350211,
-          "predicted_n": 32,
-          "predicted_ms": 4.152,
-          "predicted_per_token_ms": 0.13393548387096774,
-          "predicted_per_second": 7466.281310211946
-        },
-        "contains_expected": false
+        "output": " git remote -v",
+        "contains_expected": true
       },
       {
         "prompt": "To save the staged snapshot with the message Fix login, run",
-        "expected_fragments": [
-          "git commit -m",
-          "fix login"
+        "accepted_commands": [
+          "git commit -m \"Fix login\""
         ],
-        "output": " git log --oneline --graph --decorate * 65bb417... master: 223904 (origin/master) Unpacking objects: 100% (3/3",
-        "timings": {
-          "cache_n": 0,
-          "prompt_n": 13,
-          "prompt_ms": 0.776,
-          "prompt_per_token_ms": 0.0596923076923077,
-          "prompt_per_second": 16752.577319587628,
-          "predicted_n": 32,
-          "predicted_ms": 5.26,
-          "predicted_per_token_ms": 0.1696774193548387,
-          "predicted_per_second": 5893.536121673004
-        },
+        "output": " git commit -m \"Fix links\"",
         "contains_expected": false
       }
-    ]
+    ],
+    "median_decode_tokens_per_second": 6844.046620886478
   },
   "q4_0": {
     "file_bytes": 1135456,
-    "peak_rss_kib": 26660,
-    "median_decode_tokens_per_second": 7900.233284321112,
+    "peak_rss_kib": 26728,
+    "timing_runs": [
+      [
+        {
+          "cache_n": 0,
+          "prompt_n": 9,
+          "prompt_ms": 1.963,
+          "prompt_per_token_ms": 0.21811111111111112,
+          "prompt_per_second": 4584.819154355578,
+          "predicted_n": 32,
+          "predicted_ms": 4.698,
+          "predicted_per_token_ms": 0.1515483870967742,
+          "predicted_per_second": 6598.552575564069
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 9,
+          "prompt_ms": 0.393,
+          "prompt_per_token_ms": 0.043666666666666666,
+          "prompt_per_second": 22900.763358778626,
+          "predicted_n": 32,
+          "predicted_ms": 5.054,
+          "predicted_per_token_ms": 0.16303225806451613,
+          "predicted_per_second": 6133.755441234665
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 9,
+          "prompt_ms": 0.651,
+          "prompt_per_token_ms": 0.07233333333333333,
+          "prompt_per_second": 13824.884792626726,
+          "predicted_n": 32,
+          "predicted_ms": 4.58,
+          "predicted_per_token_ms": 0.14774193548387096,
+          "predicted_per_second": 6768.558951965065
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 7,
+          "prompt_ms": 0.34,
+          "prompt_per_token_ms": 0.04857142857142858,
+          "prompt_per_second": 20588.235294117647,
+          "predicted_n": 32,
+          "predicted_ms": 4.519,
+          "predicted_per_token_ms": 0.1457741935483871,
+          "predicted_per_second": 6859.924762115512
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 15,
+          "prompt_ms": 20.004,
+          "prompt_per_token_ms": 1.3336000000000001,
+          "prompt_per_second": 749.8500299940011,
+          "predicted_n": 32,
+          "predicted_ms": 4.213,
+          "predicted_per_token_ms": 0.13590322580645162,
+          "predicted_per_second": 7358.177070970804
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 10,
+          "prompt_ms": 0.361,
+          "prompt_per_token_ms": 0.0361,
+          "prompt_per_second": 27700.831024930747,
+          "predicted_n": 32,
+          "predicted_ms": 4.948,
+          "predicted_per_token_ms": 0.15961290322580646,
+          "predicted_per_second": 6265.157639450283
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 9,
+          "prompt_ms": 0.286,
+          "prompt_per_token_ms": 0.03177777777777777,
+          "prompt_per_second": 31468.531468531473,
+          "predicted_n": 32,
+          "predicted_ms": 3.992,
+          "predicted_per_token_ms": 0.1287741935483871,
+          "predicted_per_second": 7765.531062124249
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 13,
+          "prompt_ms": 0.627,
+          "prompt_per_token_ms": 0.04823076923076923,
+          "prompt_per_second": 20733.652312599683,
+          "predicted_n": 32,
+          "predicted_ms": 4.209,
+          "predicted_per_token_ms": 0.13577419354838707,
+          "predicted_per_second": 7365.1698740793545
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 10,
+          "prompt_ms": 0.311,
+          "prompt_per_token_ms": 0.0311,
+          "prompt_per_second": 32154.34083601286,
+          "predicted_n": 32,
+          "predicted_ms": 3.848,
+          "predicted_per_token_ms": 0.12412903225806451,
+          "predicted_per_second": 8056.133056133056
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 13,
+          "prompt_ms": 0.328,
+          "prompt_per_token_ms": 0.02523076923076923,
+          "prompt_per_second": 39634.14634146341,
+          "predicted_n": 32,
+          "predicted_ms": 3.872,
+          "predicted_per_token_ms": 0.1249032258064516,
+          "predicted_per_second": 8006.198347107438
+        }
+      ],
+      [
+        {
+          "cache_n": 0,
+          "prompt_n": 9,
+          "prompt_ms": 0.482,
+          "prompt_per_token_ms": 0.05355555555555555,
+          "prompt_per_second": 18672.19917012448,
+          "predicted_n": 32,
+          "predicted_ms": 4.671,
+          "predicted_per_token_ms": 0.15067741935483872,
+          "predicted_per_second": 6636.694497966174
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 9,
+          "prompt_ms": 0.397,
+          "prompt_per_token_ms": 0.044111111111111115,
+          "prompt_per_second": 22670.025188916876,
+          "predicted_n": 32,
+          "predicted_ms": 4.189,
+          "predicted_per_token_ms": 0.13512903225806452,
+          "predicted_per_second": 7400.334208641681
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 9,
+          "prompt_ms": 0.369,
+          "prompt_per_token_ms": 0.041,
+          "prompt_per_second": 24390.243902439026,
+          "predicted_n": 32,
+          "predicted_ms": 4.296,
+          "predicted_per_token_ms": 0.13858064516129034,
+          "predicted_per_second": 7216.0148975791435
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 7,
+          "prompt_ms": 0.348,
+          "prompt_per_token_ms": 0.04971428571428571,
+          "prompt_per_second": 20114.94252873563,
+          "predicted_n": 32,
+          "predicted_ms": 4.614,
+          "predicted_per_token_ms": 0.14883870967741936,
+          "predicted_per_second": 6718.6822713480715
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 15,
+          "prompt_ms": 0.477,
+          "prompt_per_token_ms": 0.0318,
+          "prompt_per_second": 31446.540880503147,
+          "predicted_n": 32,
+          "predicted_ms": 4.309,
+          "predicted_per_token_ms": 0.139,
+          "predicted_per_second": 7194.244604316546
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 10,
+          "prompt_ms": 0.428,
+          "prompt_per_token_ms": 0.0428,
+          "prompt_per_second": 23364.48598130841,
+          "predicted_n": 32,
+          "predicted_ms": 4.294,
+          "predicted_per_token_ms": 0.13851612903225805,
+          "predicted_per_second": 7219.375873311598
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 9,
+          "prompt_ms": 0.347,
+          "prompt_per_token_ms": 0.03855555555555555,
+          "prompt_per_second": 25936.599423631123,
+          "predicted_n": 32,
+          "predicted_ms": 4.129,
+          "predicted_per_token_ms": 0.13319354838709677,
+          "predicted_per_second": 7507.8711552434015
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 13,
+          "prompt_ms": 0.408,
+          "prompt_per_token_ms": 0.031384615384615386,
+          "prompt_per_second": 31862.745098039217,
+          "predicted_n": 32,
+          "predicted_ms": 4.424,
+          "predicted_per_token_ms": 0.14270967741935486,
+          "predicted_per_second": 7007.233273056057
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 10,
+          "prompt_ms": 0.485,
+          "prompt_per_token_ms": 0.0485,
+          "prompt_per_second": 20618.55670103093,
+          "predicted_n": 32,
+          "predicted_ms": 4.668,
+          "predicted_per_token_ms": 0.15058064516129033,
+          "predicted_per_second": 6640.959725792631
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 13,
+          "prompt_ms": 0.443,
+          "prompt_per_token_ms": 0.034076923076923074,
+          "prompt_per_second": 29345.372460496616,
+          "predicted_n": 32,
+          "predicted_ms": 4.437,
+          "predicted_per_token_ms": 0.14312903225806453,
+          "predicted_per_second": 6986.702727067838
+        }
+      ],
+      [
+        {
+          "cache_n": 0,
+          "prompt_n": 9,
+          "prompt_ms": 0.432,
+          "prompt_per_token_ms": 0.048,
+          "prompt_per_second": 20833.333333333332,
+          "predicted_n": 32,
+          "predicted_ms": 3.933,
+          "predicted_per_token_ms": 0.1268709677419355,
+          "predicted_per_second": 7882.023900330537
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 9,
+          "prompt_ms": 0.398,
+          "prompt_per_token_ms": 0.044222222222222225,
+          "prompt_per_second": 22613.065326633165,
+          "predicted_n": 32,
+          "predicted_ms": 4.277,
+          "predicted_per_token_ms": 0.13796774193548386,
+          "predicted_per_second": 7248.071077858312
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 9,
+          "prompt_ms": 0.299,
+          "prompt_per_token_ms": 0.03322222222222222,
+          "prompt_per_second": 30100.334448160538,
+          "predicted_n": 32,
+          "predicted_ms": 4.493,
+          "predicted_per_token_ms": 0.14493548387096775,
+          "predicted_per_second": 6899.621633652348
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 7,
+          "prompt_ms": 0.328,
+          "prompt_per_token_ms": 0.04685714285714286,
+          "prompt_per_second": 21341.463414634145,
+          "predicted_n": 32,
+          "predicted_ms": 3.829,
+          "predicted_per_token_ms": 0.12351612903225807,
+          "predicted_per_second": 8096.1086445547135
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 15,
+          "prompt_ms": 0.4,
+          "prompt_per_token_ms": 0.02666666666666667,
+          "prompt_per_second": 37500.0,
+          "predicted_n": 32,
+          "predicted_ms": 4.161,
+          "predicted_per_token_ms": 0.1342258064516129,
+          "predicted_per_second": 7450.1321797644805
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 10,
+          "prompt_ms": 0.314,
+          "prompt_per_token_ms": 0.0314,
+          "prompt_per_second": 31847.133757961783,
+          "predicted_n": 32,
+          "predicted_ms": 3.798,
+          "predicted_per_token_ms": 0.12251612903225807,
+          "predicted_per_second": 8162.190626645603
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 9,
+          "prompt_ms": 0.354,
+          "prompt_per_token_ms": 0.03933333333333333,
+          "prompt_per_second": 25423.728813559323,
+          "predicted_n": 32,
+          "predicted_ms": 3.833,
+          "predicted_per_token_ms": 0.12364516129032259,
+          "predicted_per_second": 8087.659796504044
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 13,
+          "prompt_ms": 0.359,
+          "prompt_per_token_ms": 0.027615384615384615,
+          "prompt_per_second": 36211.69916434541,
+          "predicted_n": 32,
+          "predicted_ms": 4.009,
+          "predicted_per_token_ms": 0.1293225806451613,
+          "predicted_per_second": 7732.601646295833
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 10,
+          "prompt_ms": 0.351,
+          "prompt_per_token_ms": 0.0351,
+          "prompt_per_second": 28490.02849002849,
+          "predicted_n": 32,
+          "predicted_ms": 3.739,
+          "predicted_per_token_ms": 0.12061290322580645,
+          "predicted_per_second": 8290.986894891681
+        },
+        {
+          "cache_n": 0,
+          "prompt_n": 13,
+          "prompt_ms": 0.589,
+          "prompt_per_token_ms": 0.045307692307692306,
+          "prompt_per_second": 22071.30730050934,
+          "predicted_n": 32,
+          "predicted_ms": 4.028,
+          "predicted_per_token_ms": 0.12993548387096773,
+          "predicted_per_second": 7696.127110228403
+        }
+      ]
+    ],
     "samples": [
       {
         "prompt": "To initialize an empty Git repository, run",
-        "expected_fragments": [
+        "accepted_commands": [
           "git init"
         ],
-        "output": " git commit -am 'Add limit to log function' [featureA 3300904] Add limit to log function 1 files changed, 1 insertions(+), 1 deletions",
-        "timings": {
-          "cache_n": 0,
-          "prompt_n": 9,
-          "prompt_ms": 0.483,
-          "prompt_per_token_ms": 0.05366666666666667,
-          "prompt_per_second": 18633.54037267081,
-          "predicted_n": 32,
-          "predicted_ms": 3.894,
-          "predicted_per_token_ms": 0.12561290322580645,
-          "predicted_per_second": 7960.965588084233
-        },
-        "contains_expected": false
+        "output": " git init",
+        "contains_expected": true
       },
       {
         "prompt": "To find out which files have changed, run",
-        "expected_fragments": [
+        "accepted_commands": [
           "git status"
         ],
-        "output": ", but it will only show you the commits in the same file. $ git show --g410efbd13591db07496601ebc7a059dd55cfe9",
-        "timings": {
-          "cache_n": 0,
-          "prompt_n": 9,
-          "prompt_ms": 0.475,
-          "prompt_per_token_ms": 0.05277777777777778,
-          "prompt_per_second": 18947.368421052633,
-          "predicted_n": 32,
-          "predicted_ms": 4.183,
-          "predicted_per_token_ms": 0.13493548387096774,
-          "predicted_per_second": 7410.949079607937
-        },
-        "contains_expected": false
+        "output": " git status",
+        "contains_expected": true
       },
       {
         "prompt": "To stage the file README.md, run",
-        "expected_fragments": [
+        "accepted_commands": [
           "git add README.md"
         ],
-        "output": " git commit -am 'Add limit to log function' [featureA 3300904] Add limit to log function You can see that the SHA-1 value",
-        "timings": {
-          "cache_n": 0,
-          "prompt_n": 9,
-          "prompt_ms": 0.358,
-          "prompt_per_token_ms": 0.03977777777777777,
-          "prompt_per_second": 25139.664804469277,
-          "predicted_n": 32,
-          "predicted_ms": 3.709,
-          "predicted_per_token_ms": 0.11964516129032259,
-          "predicted_per_second": 8358.047991372337
-        },
+        "output": " git add ARCHITECTURE.md",
         "contains_expected": false
       },
       {
         "prompt": "To view the commit history, run",
-        "expected_fragments": [
+        "accepted_commands": [
           "git log"
         ],
-        "output": " git commit -am 'Add limit to log function' [featureA 3300904] Add limit to log function 1 files changed, 1 insertions(+), 1 deletions",
-        "timings": {
-          "cache_n": 0,
-          "prompt_n": 7,
-          "prompt_ms": 0.287,
-          "prompt_per_token_ms": 0.040999999999999995,
-          "prompt_per_second": 24390.243902439026,
-          "predicted_n": 32,
-          "predicted_ms": 3.7,
-          "predicted_per_token_ms": 0.11935483870967742,
-          "predicted_per_second": 8378.378378378378
-        },
-        "contains_expected": false
+        "output": " git log",
+        "contains_expected": true
       },
       {
         "prompt": "To create a new branch named demo without switching to it, run",
-        "expected_fragments": [
+        "accepted_commands": [
           "git branch demo"
         ],
-        "output": " git commit -s. If you’re applying patches in your history, you can see that you’re ready to push to the master branch. $ git",
-        "timings": {
-          "cache_n": 0,
-          "prompt_n": 15,
-          "prompt_ms": 0.422,
-          "prompt_per_token_ms": 0.028133333333333333,
-          "prompt_per_second": 35545.02369668246,
-          "predicted_n": 32,
-          "predicted_ms": 3.908,
-          "predicted_per_token_ms": 0.12606451612903224,
-          "predicted_per_second": 7932.446264073695
-        },
+        "output": " git branch feature",
         "contains_expected": false
       },
       {
         "prompt": "To temporarily store uncommitted changes, run",
-        "expected_fragments": [
+        "accepted_commands": [
           "git stash"
         ],
-        "output": " git commit -am 'Aour for 'Aour for 'git' in' |\\ HEAD (use \"git-ref --format:\\\\\\",
-        "timings": {
-          "cache_n": 0,
-          "prompt_n": 10,
-          "prompt_ms": 0.327,
-          "prompt_per_token_ms": 0.0327,
-          "prompt_per_second": 30581.03975535168,
-          "predicted_n": 32,
-          "predicted_ms": 4.002,
-          "predicted_per_token_ms": 0.12909677419354837,
-          "predicted_per_second": 7746.126936531735
-        },
-        "contains_expected": false
+        "output": " git stash",
+        "contains_expected": true
       },
       {
         "prompt": "To download data from origin without merging, run",
-        "expected_fragments": [
+        "accepted_commands": [
           "git fetch origin"
         ],
-        "output": " git-path/etc/gitconfig.external file = \"git diff --git a/config.exclude?(dir) <dependes/git",
-        "timings": {
-          "cache_n": 0,
-          "prompt_n": 9,
-          "prompt_ms": 0.326,
-          "prompt_per_token_ms": 0.036222222222222225,
-          "prompt_per_second": 27607.361963190182,
-          "predicted_n": 32,
-          "predicted_ms": 3.797,
-          "predicted_per_token_ms": 0.12248387096774194,
-          "predicted_per_second": 8164.340268633131
-        },
-        "contains_expected": false
+        "output": " git fetch origin",
+        "contains_expected": true
       },
       {
         "prompt": "To show the difference between the index and the previous commit, run",
-        "expected_fragments": [
+        "accepted_commands": [
           "git diff --cached",
           "git diff --staged"
         ],
-        "output": " git show --continue.count option is that you can see, not the commit message and then move the commit. # # # # # # # #",
-        "timings": {
-          "cache_n": 0,
-          "prompt_n": 13,
-          "prompt_ms": 0.346,
-          "prompt_per_token_ms": 0.026615384615384614,
-          "prompt_per_second": 37572.25433526012,
-          "predicted_n": 32,
-          "predicted_ms": 4.401,
-          "predicted_per_token_ms": 0.14196774193548387,
-          "predicted_per_second": 7043.853669620541
-        },
+        "output": " git add index.html",
         "contains_expected": false
       },
       {
         "prompt": "To list the remotes along with their URLs, run",
-        "expected_fragments": [
+        "accepted_commands": [
           "git remote -v"
         ],
-        "output": " git-tree, which looks for files in detail in detail in detail in detail in detail in detail in detail in detail in detail in detail in Remotes and",
-        "timings": {
-          "cache_n": 0,
-          "prompt_n": 10,
-          "prompt_ms": 0.378,
-          "prompt_per_token_ms": 0.0378,
-          "prompt_per_second": 26455.026455026455,
-          "predicted_n": 32,
-          "predicted_ms": 4.109,
-          "predicted_per_token_ms": 0.1325483870967742,
-          "predicted_per_second": 7544.414699440254
-        },
-        "contains_expected": false
+        "output": " git remote -v",
+        "contains_expected": true
       },
       {
         "prompt": "To save the staged snapshot with the message Fix login, run",
-        "expected_fragments": [
-          "git commit -m",
-          "fix login"
+        "accepted_commands": [
+          "git commit -m \"Fix login\""
         ],
-        "output": " git log --oneline --graph --decorate * bak --oneline --graph --decorate * bak --oneline --graph --decorate * 65c8 (HEAD",
-        "timings": {
-          "cache_n": 0,
-          "prompt_n": 13,
-          "prompt_ms": 0.351,
-          "prompt_per_token_ms": 0.027,
-          "prompt_per_second": 37037.03703703704,
-          "predicted_n": 32,
-          "predicted_ms": 3.94,
-          "predicted_per_token_ms": 0.1270967741935484,
-          "predicted_per_second": 7868.020304568528
-        },
+        "output": " git commit -m \"Fix links\"",
         "contains_expected": false
       }
-    ]
+    ],
+    "median_decode_tokens_per_second": 7303.124074414558
   }
 }
