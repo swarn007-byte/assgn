@@ -1,4 +1,5 @@
 """Export the locally trained Llama and its GPT-2-style tokenizer to GGUF."""
+import argparse
 from pathlib import Path
 import sys
 
@@ -25,5 +26,10 @@ class ByteLevelLlama(LlamaModel):
 
 
 if __name__ == "__main__":
-    ByteLevelLlama(CACHE / "base", gguf.LlamaFileType.MOSTLY_F16,
-                   CACHE / "progit-f16.gguf", model_name="Pro Git 1.3M").write()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--commands", action="store_true")
+    args = parser.parse_args()
+    source = "commands" if args.commands else "base"
+    output = "commands-f16.gguf" if args.commands else "progit-f16.gguf"
+    ByteLevelLlama(CACHE / source, gguf.LlamaFileType.MOSTLY_F16,
+                   CACHE / output, model_name=f"Pro Git 1.3M {source}").write()
