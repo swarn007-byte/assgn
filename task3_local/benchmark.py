@@ -1,6 +1,7 @@
 """Compare the same checkpoint in fresh CPU llama-server processes."""
 from contextlib import contextmanager
 import json
+import shlex
 from pathlib import Path
 from socket import socket
 from statistics import median
@@ -25,7 +26,7 @@ PROMPTS = [
      ["git diff --cached", "git diff --staged"]),
     ("To list the remotes along with their URLs, run", ["git remote -v"]),
     ("To save the staged snapshot with the message Fix login, run",
-     ["git commit -m", "fix login"]),
+     ['git commit -m "Fix login"']),
 ]
 
 
@@ -38,14 +39,14 @@ def request(endpoint, route, data=None):
 
 
 @contextmanager
-def start(key):
+def start(key, checkpoint="progit"):
     with socket() as sock:
         sock.bind(("127.0.0.1", 0))
         port = sock.getsockname()[1]
     endpoint = f"http://127.0.0.1:{port}"
     with (CACHE / f"server-{key}.log").open("w") as log:
         with subprocess.Popen([
-            str(SERVER), "-m", str(CACHE / f"progit-{key}.gguf"),
+            str(SERVER), "-m", str(CACHE / f"{checkpoint}-{key}.gguf"),
             "--host", "127.0.0.1", "--port", str(port), "-t", "4", "-tb", "4",
             "-ngl", "0", "-c", "1024", "-np", "1", "--cache-ram", "0", "--no-ui",
         ], stdout=log, stderr=log) as server:
@@ -70,9 +71,9 @@ def start(key):
                     server.wait()
 
 
-def complete(endpoint, prompt):
+def complete(endpoint, prompt, *, force_length=True):
     return request(endpoint, "/completion", {
-        "prompt": prompt, "n_predict": 32, "ignore_eos": True, "temperature": 0,
+        "prompt": prompt, "n_predict": 32, "ignore_eos": force_length, "temperature": 0,
         "seed": 713, "cache_prompt": False,
     })
 
@@ -82,14 +83,22 @@ def peak_rss(pid):
     return int(next(line for line in status.splitlines() if line.startswith("VmHWM:")).split()[1])
 
 
+def command_matches(output, expected):
+    try:
+        return shlex.split(output.strip()) in [shlex.split(command) for command in expected]
+    except ValueError:
+        return False
+
+
 def main():
     from transformers import AutoTokenizer
 
     tokenizer = AutoTokenizer.from_pretrained(CACHE / "base")
     results = {}
+    checkpoint = "commands"
     for key in KEYS:
         rows = []
-        with start(key) as (endpoint, pid):
+        with start(key, checkpoint) as (endpoint, pid):
             for prompt, expected in PROMPTS:
                 ids = request(endpoint, "/tokenize", {"content": prompt, "add_special": False})["tokens"]
                 assert ids == tokenizer.encode(prompt, add_special_tokens=False), (key, prompt)
@@ -98,14 +107,14 @@ def main():
                 response = complete(endpoint, prompt)
                 timings = response["timings"]
                 assert timings["predicted_n"] == 32 and timings["predicted_ms"] > 0, timings
+                output = complete(endpoint, prompt, force_length=False)["content"]
                 rows.append({
-                    "prompt": prompt, "expected_fragments": expected,
-                    "output": response["content"], "timings": timings,
-                    "contains_expected": all(fragment.lower() in response["content"].lower()
-                                             for fragment in expected),
+                    "prompt": prompt, "accepted_commands": expected,
+                    "output": output, "timings": timings,
+                    "contains_expected": command_matches(output, expected),
                 })
             results[key] = {
-                "file_bytes": (CACHE / f"progit-{key}.gguf").stat().st_size,
+                "file_bytes": (CACHE / f"{checkpoint}-{key}.gguf").stat().st_size,
                 "peak_rss_kib": peak_rss(pid),
                 "median_decode_tokens_per_second": median(r["timings"]["predicted_per_second"] for r in rows),
                 "samples": rows,
