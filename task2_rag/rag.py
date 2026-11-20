@@ -80,7 +80,32 @@ def answer(endpoint, question, passages):
     request = Request(endpoint.rstrip("/") + "/completion", data=payload,
                       headers={"Content-Type": "application/json"})
     with urlopen(request, timeout=180) as response:
-        return json.load(response)["content"].strip()
+        generated = json.load(response)["content"].strip()
+
+    # A tiny completion model often invents commands. Only show its text when the
+    # retrieved evidence contains it verbatim; otherwise quote retrieved evidence.
+    candidate = re.sub(r"\s*\[PDF page \d+\]\s*$", "", generated).strip()
+    if candidate:
+        for passage in passages:
+            if candidate in passage["text"]:
+                return {"text": candidate, "page": passage["page"], "mode": "generated",
+                        "raw_generation": generated}
+
+    terms = set(words(question)) - {
+        "a", "an", "and", "are", "do", "does", "for", "git", "how", "i", "in", "is",
+        "it", "of", "on", "the", "to", "what", "which", "with",
+    }
+    excerpts = [
+        (part.strip(), passage["page"])
+        for passage in passages
+        for part in re.split(r"(?<=[.!?])\s+", passage["text"])
+        if part.strip()
+    ]
+    quote, page = max(excerpts, key=lambda row: len(terms & set(words(row[0]))))
+    if not terms & set(words(quote)):
+        return {"text": "I could not find supporting evidence.", "page": None,
+                "mode": "abstained", "raw_generation": generated}
+    return {"text": quote, "page": page, "mode": "retrieved_quote", "raw_generation": generated}
 
 
 def main():
