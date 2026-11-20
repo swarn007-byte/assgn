@@ -11,8 +11,8 @@ ROOT = Path(__file__).resolve().parents[1]
 BASE = ROOT / ".cache/base"
 RESULT = Path(__file__).with_name("results.json")
 SEED = 713
-RANK, ALPHA, LR, EPOCHS = 8, 16, 0.003, 8
-TARGETS = ["q_proj", "v_proj"]
+RANK, ALPHA, LR, EPOCHS = 8, 16, 0.002, 6
+TARGETS = ["q_proj", "k_proj", "v_proj", "o_proj"]
 CATEGORIES = {
     "A": ("stage", [
         "Stage {file} for my next commit.", "Add {file} to the Git index.",
@@ -51,6 +51,48 @@ CATEGORIES = {
         "Forward what I have locally to the shared repo at {remote}.",
     ]),
 }
+EXTRA_TRAINING = {
+    "A": [
+        "Mark {file} ready for inclusion in the upcoming revision.",
+        "I'd like the next save to contain the changes in {file}.",
+        "Select the modifications in {file}, then leave the commit for later.",
+        "Get {file} ready without writing history yet.",
+        "Place the edited {file} in Git's list of pending changes.",
+        "Pick up {file} for the next recording.",
+        "Before I save a revision, include the updated {file}.",
+        "Collect the current version of {file} for the future commit.",
+    ],
+    "B": [
+        "Finalize the accumulated changes under the description {message}.",
+        "Make a local revision with the comment {message}.",
+        "Write the pending edits into the repository's history as {message}.",
+        "Permanently record the selected changes with the caption {message}.",
+        "Checkpoint what I've already selected under the title {message}.",
+        "Take the waiting changes and create a new history entry labeled {message}.",
+        "The work is staged; save it now and call it {message}.",
+        "Capture the prepared state as a revision bearing the name {message}.",
+    ],
+    "C": [
+        "Let me develop independently on a new line called {branch}.",
+        "Fork off a new local history line under the name {branch}.",
+        "I'd like a separate workspace tip named {branch} starting at the current commit.",
+        "Set aside a separate path for upcoming work and name it {branch}.",
+        "Make {branch} a new reference to the current commit.",
+        "Give this work a separate branch tip called {branch}.",
+        "I want to try something aside from the main development line; name it {branch}.",
+        "Make room for parallel development under the name {branch}.",
+    ],
+    "D": [
+        "Transfer the local history to {remote} so others can fetch it.",
+        "Share my completed work on the server called {remote}.",
+        "Send the outgoing commit objects over to {remote}.",
+        "Make {remote} reflect the changes I've recorded here.",
+        "Let teammates get my latest local revisions from {remote}.",
+        "Upload my saved work and advance the corresponding reference at {remote}.",
+        "Copy the new local revisions over to the repository named {remote}.",
+        "Synchronize {remote} with the commits that exist only here.",
+    ],
+}
 TRAIN = dict(file=["readme.md", "index.html", "server.py", "main.go", "notes.txt", "Makefile"],
              message=["fix parser", "update docs", "first draft", "add flag", "clean imports", "bump build"],
              branch=["fix-nav", "release", "docs", "trial", "api", "work"],
@@ -65,7 +107,7 @@ def data(held_out):
     rows = []
     for label, (_, training, test) in CATEGORIES.items():
         slots = TEST if held_out else TRAIN
-        templates = test if held_out else training
+        templates = test if held_out else [*training, *EXTRA_TRAINING[label]]
         for template in templates:
             key = template.split("{")[1].split("}")[0]
             rows.extend((template.format(**{key: value}), label) for value in slots[key])
