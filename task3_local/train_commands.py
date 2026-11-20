@@ -30,6 +30,32 @@ COMMANDS = [
     ("restore the most recent stash and drop it", "git stash pop"),
     ("make an annotated tag called {branch}", 'git tag -a {branch} -m "release"'),
 ]
+PARAPHRASES = {
+    "git init": ["initialize version control here", "turn this directory into a new repository",
+                 "set up an empty repo", "begin tracking this project with Git"],
+    "git status": ["see what has been modified", "check for changed or untracked files",
+                   "see the current status of the repo", "check the index and working directory"],
+    "git add {file}": ["put {file} in the index", "prepare {file} to commit", "add {file} to staging",
+                       "include {file} in the next commit"],
+    "git log": ["see the repository history", "list the recorded commits",
+                "show previous revisions in full", "browse the commit log"],
+    "git branch {branch}": ["create the local branch {branch} without checking it out",
+                            "create a Git branch named {branch}", "add a new reference named {branch}",
+                            "start a separate branch called {branch} without changing HEAD"],
+    "git stash": ["put uncommitted work aside for now", "save my local edits temporarily",
+                  "set aside modifications and clean the working tree", "shelve changes without committing"],
+    "git fetch {remote}": ["download remote commits from {remote}", "retrieve updated refs from {remote}",
+                           "get the newest changes from {remote} but don't merge them",
+                           "fetch the remote named {remote} without touching local edits"],
+    "git diff --cached": ["display what is going into the next commit", "view the staged patch",
+                          "compare the index with the committed snapshot", "show the diff of staged changes"],
+    "git remote -v": ["list fetch and push URLs", "show remote names together with URLs",
+                      "print the configured remote addresses", "view remotes in verbose mode"],
+    'git commit -m "{message}"': ["create a commit with the message {message}",
+                                 "commit the staged work and call it {message}",
+                                 "save the contents of the index with the note {message}",
+                                 "write a revision named {message} from staged edits"],
+}
 TEMPLATES = [
     "Git request: {goal}\nCommand:", "Task: {goal}\nGit command:",
     "Action to perform: {goal}\nAnswer:", "Which command would you use to {goal}?\nCommand:",
@@ -43,6 +69,10 @@ OPTIONS = [
     dict(file="config.yml", branch="cleanup", remote="fork", message="Clean imports"),
     dict(file="app.js", branch="feature", remote="origin", message="Update tests"),
     dict(file="build.sh", branch="sandbox", remote="backup", message="Handle errors"),
+    dict(file="CONTRIBUTING.md", branch="compat", remote="central", message="Fix links"),
+    dict(file="ARCHITECTURE.md", branch="notes", remote="server", message="Add diagrams"),
+    dict(file="TODO.md", branch="wip", remote="studio", message="Write comments"),
+    dict(file="lib/parser.py", branch="parser", remote="review", message="Improve parsing"),
 ]
 
 
@@ -53,7 +83,8 @@ def main():
     tokenizer = AutoTokenizer.from_pretrained(CACHE / "base")
     model = AutoModelForCausalLM.from_pretrained(CACHE / "base")
     rows = []
-    for goal, command in COMMANDS:
+    examples = COMMANDS + [(goal, command) for command, goals in PARAPHRASES.items() for goal in goals]
+    for goal, command in examples:
         for option in OPTIONS if "{" in command else OPTIONS[:1]:
             goal_text, command_text = goal.format(**option), command.format(**option)
             for template in TEMPLATES:
@@ -62,7 +93,7 @@ def main():
                 rows.append((prefix + suffix, [-100] * len(prefix) + suffix))
     optimizer = torch.optim.AdamW(model.parameters(), lr=0.0015)
     model.train()
-    for epoch in range(16):
+    for epoch in range(12):
         random.shuffle(rows)
         losses = []
         for i in range(0, len(rows), 24):
