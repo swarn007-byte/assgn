@@ -14,6 +14,15 @@ HERE = Path(__file__).resolve().parent
 CACHE = HERE.parent / ".cache"
 SIZES = (64, 160)
 OVERLAP = 0.25
+STOP = set("a an and are as at be by can do does for from give how i in is it me of on or run that the them there to was what when which while with you".split())
+
+
+def lexical_words(text):
+    return [
+        word if word.startswith("-") else re.sub(r"(?<=[a-z])s$", "", word)
+        for word in re.findall(r"--?[a-z][a-z-]*|[a-z0-9]+", text.lower())
+        if word not in STOP
+    ]
 
 
 def words(text):
@@ -57,6 +66,14 @@ class Retriever:
             for term, count in frequencies.items()
         }
         self.matrix = np.stack([self.embed(p["text"]) for p in self.passages])
+        counts = [Counter(lexical_words(p["text"])) for p in self.passages]
+        lengths = np.array([sum(row.values()) for row in counts])
+        norm = 1.2 * (0.25 + 0.75 * lengths / lengths.mean())
+        self.postings = {}
+        for i, row in enumerate(counts):
+            for term, frequency in row.items():
+                weight = frequency * 2.2 / (frequency + norm[i])
+                self.postings.setdefault(term, []).append((i, weight))
 
     def embed(self, text):
         features = [self.vectors[t] * self.idf.get(t, 1.0)
@@ -64,8 +81,24 @@ class Retriever:
         vector = np.sum(features, axis=0) if features else np.zeros(50, dtype=np.float32)
         return vector / max(float(np.linalg.norm(vector)), 1e-12)
 
-    def search(self, question, k=5):
-        scores = self.matrix @ self.embed(question)
+    def search(self, question, k=5, hybrid=True):
+        dense = self.matrix @ self.embed(question)
+        scores = dense
+        if hybrid:
+            lexical = np.zeros_like(dense)
+            n = len(dense)
+            for term in set(lexical_words(question)):
+                postings = self.postings.get(term, [])
+                if postings:
+                    ids, weights = zip(*postings)
+                    idf = math.log1p((n - len(ids) + 0.5) / (len(ids) + 0.5))
+                    lexical[list(ids)] += idf * np.array(weights)
+            # Reciprocal rank fusion makes cosine and BM25 comparable.
+            scores = np.zeros_like(dense)
+            for values in (dense, lexical):
+                ranked = np.argsort(-values, kind="stable")
+                valid = ranked[values[ranked] > 0]
+                scores[valid] += 1 / (10 + np.arange(1, len(valid) + 1))
         ranks = np.argsort(-scores, kind="stable")[:k]
         return [dict(self.passages[i], score=float(scores[i])) for i in ranks]
 
@@ -137,14 +170,18 @@ def main():
         for question, page, gold in questions:
             assert gold in pages[page], (page, gold)
             hits = index.search(question)
+            dense = index.search(question, hybrid=False)
+            dense_rank = next((i for i, hit in enumerate(dense, 1)
+                               if hit["page"] == page and gold in hit["text"]), None)
             # A hit requires the annotated passage in full, on the annotated PDF page.
             rank = next((i for i, hit in enumerate(hits, 1)
                          if hit["page"] == page and gold in hit["text"]), None)
             gold_windows = sum(p["page"] == page and gold in p["text"] for p in index.passages)
             rows.append({"question": question, "gold_page": page, "gold": gold,
-                         "first_gold_rank": rank, "gold_windows": gold_windows, "retrieved": hits})
+                         "first_gold_rank": rank, "dense_gold_rank": dense_rank, "gold_windows": gold_windows, "retrieved": hits})
         runs[str(size)] = {"hits": sum(row["first_gold_rank"] is not None for row in rows),
-                           "total": len(rows), "chunks": len(index.passages), "rows": rows}
+                           "total": len(rows), "dense_hits": sum(row["dense_gold_rank"] is not None for row in rows),
+                           "chunks": len(index.passages), "rows": rows}
     if args.endpoint:
         best = max(runs.values(), key=lambda run: run["hits"])
         for row in best["rows"]:
