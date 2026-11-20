@@ -1,0 +1,17 @@
+[
+  ["How do I put an existing non-versioned directory under Git control, and what directory gets created?", 32, "$ git init This creates a new subdirectory named .git that contains all of your necessary repository files"],
+  ["What counts as tracked besides files from the last snapshot?", 34, "Tracked files are files that were in the last snapshot, as well as any newly staged files"],
+  ["What does git add do if I give it a folder instead of a file?", 36, "if it’s a directory, the command adds all the files in that directory recursively"],
+  ["When reading git status --short, which column represents the index and which represents working files?", 38, "the left- hand column indicates the status of the staging area and the right-hand column indicates the status of the working tree"],
+  ["How can an ignore pattern make an exception for one file?", 38, "You can negate a pattern by starting it with an exclamation point (!)"],
+  ["What are the two equivalent options to see the staged diff?", 41, "git diff --cached to see what you’ve staged so far (--staged and --cached are synonyms)"],
+  ["How can I bypass the add step for already tracked changes when committing?", 43, "Adding the -a option to the git commit command makes Git automatically stage every file that is already tracked before doing the commit"],
+  ["How can I untrack README but leave the file on disk?", 45, "To do this, use the --cached option: $ git rm --cached README"],
+  ["Is git mv fundamentally different from moving a file and staging the old and new paths yourself?", 46, "git mv is one command instead of three — it’s a convenience function"],
+  ["Which log option shows the patch introduced by each change?", 47, "-p or --patch, which shows the difference (the patch output) introduced in each commit"],
+  ["Which log filters accept a lower bound for the commit date?", 51, "--since, --after Limit the commits to those made after the specified date"],
+  ["When I amend the latest commit, does the previous commit remain in the branch history?", 53, "You end up with a single commit — the second commit replaces the results of the first"],
+  ["How do I list the fetch and push URLs behind each remote nickname?", 57, "You can also specify -v, which shows you the URLs that Git has stored for the shortname to be used when reading and writing to that remote: $ git remote -v"],
+  ["Which git tag flag creates the annotated kind?", 62, "The easiest way is to specify -a when you run the tag command"],
+  ["How do I abbreviate checkout to co across my repositories?", 67, "git config --global alias.co checkout"]
+]
