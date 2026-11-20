@@ -65,22 +65,23 @@ def build():
     p(f"The {lora['train_count']} training requests and {n} test requests use disjoint "
       "templates and slot values. The test has 15 requests per class, with five slot values "
       "per template. Accuracy measures this template-based test, so requests derived from "
-      "the same template are correlated.")
+      "the same template are correlated. This is a repeat evaluation on the original "
+      "test suite after a training revision. Treat the results as development evidence.")
     p("Adapter settings", section)
-    p(f"Rank {lora['rank']}, alpha {lora['alpha']}, targets <font name='Courier'>q_proj</font> "
-      f"and <font name='Courier'>v_proj</font>, AdamW learning rate {lora['learning_rate']}, "
+    p(f"Rank {lora['rank']}, alpha {lora['alpha']}, targets Q/K/V/O attention projections, "
+      f"AdamW learning rate {lora['learning_rate']}, "
       f"{lora['epochs']} epochs, batch size 12. Rank 8 limits the update size; alpha 16 "
-      "gives a scale of 2. Query and value projections can change what gets attended to "
-      "and what information attention carries. The learning rate and epoch count were "
+      "gives a scale of 2. Adapting all four attention projections lets the model change "
+      "which words interact and how those interactions contribute to the classifier. The learning rate and epoch count were "
       "fixed for this small supervised run. Only "
       f"{lora['trainable_parameters']:,} parameters were trained. Training loss fell from "
       f"{lora['epoch_losses'][0]:.2f} to {lora['epoch_losses'][-1]:.3f}.")
     p("Three held-out failures", section)
     names = dict(A="stage", B="commit", C="branch", D="push")
     for i, reason in [
-        (20, "The request avoids the word <i>commit</i>; revision could evoke a line of history."),
-        (35, "Independent line is an indirect cue, and the request omits <i>branch</i>."),
-        (45, "The destination is a bare name, with no explicit <i>push</i> or <i>remote</i>."),
+        (20, "Snapshot and pending changes can resemble staging when the verb <i>commit</i> is absent."),
+        (36, "Independent line is an indirect cue, and the request omits <i>branch</i>."),
+        (54, "The verb <i>sync</i> describes a broader operation than the explicit <i>push</i> intent."),
     ]:
         row = lora["examples"][i]
         assert row["label"] != row["lora"]
@@ -88,12 +89,12 @@ def build():
           f"(gold {names[row['label']]}). {reason}")
     p("7B training memory estimate", section)
     p("Assume 7B weights, BF16 weights and gradients, FP32 Adam moments and a master "
-      "copy, 32 Llama-2-style layers and 4,096-wide Q/V projections. Decimal GB below. "
-      "Rank-8 Q/V LoRA has 32 × 2 × 8 × (4,096 + 4,096) ≈ 4.19M adapter parameters.")
+      "copy, 32 Llama-2-style layers and 4,096-wide Q/K/V/O projections. Decimal GB below. "
+      "Rank-8 Q/K/V/O LoRA has 32 × 4 × 8 × (4,096 + 4,096) ≈ 8.39M adapter parameters.")
     p("<b>Full:</b> 7B × (2 + 2 + 8 + 4) bytes = 112 GB. "
-      "<b>LoRA:</b> 7B × 2 bytes + 4.19M × 16 bytes ≈ 14.07 GB. "
+      "<b>LoRA:</b> 7B × 2 bytes + 8.39M × 16 bytes ≈ 14.13 GB. "
       "<b>QLoRA:</b> 7B × 0.6 bytes (4-bit plus scales and higher-precision tensors, "
-      "as a rough effective average) + 4.19M × 16 bytes ≈ 4.27 GB.")
+      "as a rough effective average) + 8.39M × 16 bytes ≈ 4.33 GB.")
     p("With an illustrative 2–6 GB for checkpointed activations and workspace at small "
       "microbatch and short context, totals are roughly 114–118 GB, 16–20 GB, and 6–10 GB. "
       "Sequence length, kernels and optimizer implementation can shift these totals.")
@@ -103,26 +104,29 @@ def build():
     p("Corpus: Scott Chacon and Ben Straub’s <i>Pro Git</i> 2.1.450, PDF pages 32–100 "
       "(69 pages). Chunk boundaries respect pages and use 25% overlap. The embedding "
       "is an L2-normalized, chunk-IDF-weighted mean of pretrained 50-dimensional GloVe "
-      "word vectors. NumPy ranks by cosine similarity. The same 15 authored questions "
+      "word vectors. NumPy ranks by cosine similarity. Hybrid search fuses dense and BM25 "
+      "ranks with reciprocal rank fusion. BM25 retains command flags and discounts common words. "
+      "The same 15 authored questions "
       "are used in both runs. A hit means a top-five chunk on the gold page contains "
       "the full annotated passage.")
-    table(["Chunk size", "Indexed chunks", "Recall@5"], [
-        (f"{size} words", run["chunks"], f"{run['hits']}/{run['total']} ({run['hits']/run['total']:.1%})")
+    table(["Chunk size", "Indexed chunks", "Dense Recall@5", "Hybrid Recall@5"], [
+        (f"{size} words", run["chunks"], f"{run['dense_hits']}/{run['total']}",
+         f"{run['hits']}/{run['total']} ({run['hits']/run['total']:.1%})")
         for size, run in rag.items()
-    ], [225, 110, 140])
+    ], [120, 95, 125, 135])
     p("The 160-word windows won on this question set. For the ignore-pattern exception, "
-      "page 38 reached rank 4 only in the longer run. Larger windows can connect a "
+      "page 38 reached rank 2 only in the longer hybrid run. Larger windows can connect a "
       "short rule to the surrounding explanation, though the smaller index also "
       "changes the number of competing windows. The result is specific to these questions.")
     p("Two retrieval failures", section)
     p("<b>Staged diff flags:</b> The reference is on PDF page 41. The longer run returned "
-      "pages 50, 51, 40, 40 and 51. The scoring vocabulary strips punctuation and averages "
-      "word meanings, so rare exact command syntax contributes weakly. Preserve flags as "
-      "tokens and combine BM25 with vector scores.")
-    p("<b>Remote URLs:</b> The reference is on PDF page 57. The longer run returned pages "
-      "100, 59, 100, 100 and 34. The paraphrase ‘remote nickname’ competes with many "
-      "remote-related passages. Expand it with ‘shortname’ and re-rank for listing both "
-      "fetch and push URLs.")
+      "pages 40, 40, 50, 39 and 40. The question omits the exact flags, so BM25 mainly sees "
+      "generic words like ‘staged’ and ‘diff’. A command-aware query expansion could add "
+      "the synonymous flags and find the matching passage.")
+    p("<b>Rename via git mv:</b> The reference is on PDF page 46. The longer run returned "
+      "pages 99, 45, 99, 89 and 88. These excerpts match general movement and staging terms. "
+      "Boosting the exact command phrase <font name='Courier'>git mv</font> as a unit could "
+      "lift passages that describe it.")
     p("From retrieved text to an answer", section)
     modes = Counter(row["generated_answer"]["mode"] for row in rag["160"]["rows"])
     p(f"The local Llama receives the top three excerpts. The system accepts generated "
@@ -143,11 +147,13 @@ def build():
 
     story.append(PageBreak())
     heading(3, "Local inference and quantisation")
-    p("The same Pro Git checkpoint ran in llama.cpp b12359 on an AMD EPYC 9V74 cloud "
-      "CPU. Each setting used four inference threads, a 1,024-token context, one slot, "
-      "greedy decoding, one warm-up request, and 32 generated tokens per prompt. Decode "
-      "rate below is the median of ten server timings and excludes prompt ingestion. "
-      "Peak RSS is the server’s Linux VmHWM, including executable, model and buffers.")
+    p("The same command-tuned Pro Git checkpoint ran in llama.cpp b12359 on an AMD EPYC "
+      "9V74 cloud CPU. Supervised continuation training used synthetic request "
+      "paraphrases and command completions. The original prompts were reused for a development re-test. Each setting used four inference threads, a 1,024-token context, one slot, "
+      "greedy decoding, one warm-up per process, and up to 32 generated tokens per prompt. Decode "
+      "rate below is the median of 30 fixed-length server timings across three fresh processes per format and excludes prompt ingestion. "
+      "A separate quality pass allowed EOS and compared shell tokens against accepted commands. "
+      "Peak RSS is the highest Linux VmHWM, including executable, model and buffers.")
     table(["Setting", "Decode tok/s", "Peak RSS MiB", "GGUF MiB", "Command hits"], [
         (key.upper(), f"{run['median_decode_tokens_per_second']:,.0f}",
          f"{run['peak_rss_kib']/1024:.2f}", f"{run['file_bytes']/2**20:.2f}",
@@ -156,13 +162,23 @@ def build():
     ], [85, 102, 99, 92, 97])
     matched = sum(a["output"] == b["output"]
                   for a, b in zip(local["f16"]["samples"], local["q4_0"]["samples"]))
-    p(f"Q4_0 decoded faster in this run and reduced the GGUF size. {matched}/10 outputs "
-      "were identical. Both supplied a memorized commit example for the initialization "
-      "prompt, where <font name='Courier'>git init</font> was expected. The branch prompt "
-      "diverged: F16 began with <font name='Courier'>git log</font>, Q4_0 with "
-      "<font name='Courier'>git commit -s</font>. Both were wrong. This checkpoint’s "
-      "0/10 baseline leaves little room for detecting quality loss with this rubric. "
-      "The repo includes all ten paired outputs and command checks.")
+    p(f"Quantisation reduced the GGUF size. {matched}/10 completions were byte-identical "
+      "across formats. The examples below show how the score treats commands and operands. "
+      "The complete ten-prompt comparison is in the repository.")
+    divergent = [(a, b) for a, b in zip(local["f16"]["samples"], local["q4_0"]["samples"])
+                 if a["output"] != b["output"]]
+    paired = list(zip(local["f16"]["samples"], local["q4_0"]["samples"]))
+    if divergent:
+        examples = divergent[:2]
+    else:
+        examples = [next((pair for pair in paired if pair[0]["contains_expected"]), paired[0]),
+                    next((pair for pair in paired if not pair[0]["contains_expected"]), paired[-1])]
+    for a, b in examples:
+        left = escape(a["output"].strip()[:105])
+        right_output = escape(b["output"].strip()[:105])
+        expected = escape(a["accepted_commands"][0])
+        p(f"“{escape(a['prompt'])}”<br/>Expected <font name='Courier'>{expected}</font>. "
+          f"F16 <font name='Courier'>{left}</font>. Q4_0 <font name='Courier'>{right_output}</font>.")
     p("KV cache and weight quantisation", section)
     p("Each attention layer saves key and value vectors for past tokens. During decoding, "
       "the new token’s query attends to these saved vectors, avoiding repeated projection "
@@ -181,6 +197,9 @@ def build():
       "not monopolize decode. Load-test 20 simultaneous requests and watch peak VRAM, "
       "p95 time to first token and p95 inter-token latency. Reduce active concurrency "
       "or context if the measured service target requires it.")
+
+    p("Reproduce locally with <font name='Courier'>./setup.sh</font> and "
+      "<font name='Courier'>./task3_local/run.sh</font>.")
 
     def footer(canvas, doc):
         canvas.setStrokeColor(colors.HexColor("#BDD2D2"))
