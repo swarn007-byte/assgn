@@ -94,33 +94,36 @@ def main():
     from transformers import AutoTokenizer
 
     tokenizer = AutoTokenizer.from_pretrained(CACHE / "base")
-    results = {}
-    checkpoint = "commands"
-    for key in KEYS:
-        rows = []
-        with start(key, checkpoint) as (endpoint, pid):
-            for prompt, expected in PROMPTS:
-                ids = request(endpoint, "/tokenize", {"content": prompt, "add_special": False})["tokens"]
-                assert ids == tokenizer.encode(prompt, add_special_tokens=False), (key, prompt)
-            complete(endpoint, "Git tracks changes to files.")
-            for prompt, expected in PROMPTS:
-                response = complete(endpoint, prompt)
-                timings = response["timings"]
-                assert timings["predicted_n"] == 32 and timings["predicted_ms"] > 0, timings
-                output = complete(endpoint, prompt, force_length=False)["content"]
-                rows.append({
-                    "prompt": prompt, "accepted_commands": expected,
-                    "output": output, "timings": timings,
-                    "contains_expected": command_matches(output, expected),
-                })
-            results[key] = {
-                "file_bytes": (CACHE / f"{checkpoint}-{key}.gguf").stat().st_size,
-                "peak_rss_kib": peak_rss(pid),
-                "median_decode_tokens_per_second": median(r["timings"]["predicted_per_second"] for r in rows),
-                "samples": rows,
-            }
+    results = {key: {"file_bytes": (CACHE / f"commands-{key}.gguf").stat().st_size,
+                     "peak_rss_kib": 0, "timing_runs": [], "samples": []} for key in KEYS}
+    for order in (KEYS, KEYS[::-1], KEYS):
+        for key in order:
+            result = results[key]
+            timings_run = []
+            with start(key, "commands") as (endpoint, pid):
+                for prompt, _ in PROMPTS:
+                    ids = request(endpoint, "/tokenize", {"content": prompt, "add_special": False})["tokens"]
+                    assert ids == tokenizer.encode(prompt, add_special_tokens=False), (key, prompt)
+                complete(endpoint, "Git tracks changes to files.")
+                for prompt, _ in PROMPTS:
+                    timings = complete(endpoint, prompt)["timings"]
+                    assert timings["predicted_n"] == 32 and timings["predicted_ms"] > 0, timings
+                    timings_run.append(timings)
+                result["timing_runs"].append(timings_run)
+                if not result["samples"]:
+                    for prompt, expected in PROMPTS:
+                        output = complete(endpoint, prompt, force_length=False)["content"]
+                        result["samples"].append({
+                            "prompt": prompt, "accepted_commands": expected, "output": output,
+                            "contains_expected": command_matches(output, expected),
+                        })
+                result["peak_rss_kib"] = max(result["peak_rss_kib"], peak_rss(pid))
+    for result in results.values():
+        result["median_decode_tokens_per_second"] = median(
+            row["predicted_per_second"] for run in result["timing_runs"] for row in run
+        )
     (HERE / "results.json").write_text(json.dumps(results, ensure_ascii=False, indent=2) + "\n")
-    print({key: {k: v for k, v in result.items() if k != "samples"}
+    print({key: {k: v for k, v in result.items() if k not in {"samples", "timing_runs"}}
            for key, result in results.items()})
 
 
