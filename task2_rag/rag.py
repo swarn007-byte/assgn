@@ -81,26 +81,32 @@ class Retriever:
         vector = np.sum(features, axis=0) if features else np.zeros(50, dtype=np.float32)
         return vector / max(float(np.linalg.norm(vector)), 1e-12)
 
+    def bm25_scores(self, question):
+        scores = np.zeros(len(self.passages), dtype=self.matrix.dtype)
+        for term in set(lexical_words(question)):
+            matches = self.postings.get(term)
+            if matches:
+                chunk_ids, term_weights = zip(*matches)
+                count = len(chunk_ids)
+                idf = math.log1p((len(self.passages) - count + 0.5) / (count + 0.5))
+                scores[list(chunk_ids)] += idf * np.array(term_weights)
+        return scores
+
     def search(self, question, k=5, hybrid=True):
-        dense = self.matrix @ self.embed(question)
-        scores = dense
+        # The vectors have unit length, so the dot product is cosine similarity.
+        dense_scores = self.matrix @ self.embed(question)
+        scores = dense_scores
         if hybrid:
-            lexical = np.zeros_like(dense)
-            n = len(dense)
-            for term in set(lexical_words(question)):
-                postings = self.postings.get(term, [])
-                if postings:
-                    ids, weights = zip(*postings)
-                    idf = math.log1p((n - len(ids) + 0.5) / (len(ids) + 0.5))
-                    lexical[list(ids)] += idf * np.array(weights)
-            # Reciprocal rank fusion makes cosine and BM25 comparable.
-            scores = np.zeros_like(dense)
-            for values in (dense, lexical):
-                ranked = np.argsort(-values, kind="stable")
-                valid = ranked[values[ranked] > 0]
-                scores[valid] += 1 / (10 + np.arange(1, len(valid) + 1))
-        ranks = np.argsort(-scores, kind="stable")[:k]
-        return [dict(self.passages[i], score=float(scores[i])) for i in ranks]
+            scores = np.zeros_like(dense_scores)
+            for method_scores in (dense_scores, self.bm25_scores(question)):
+                ranked = np.argsort(-method_scores, kind="stable")
+                ranked = ranked[method_scores[ranked] > 0]
+                # A high position in either search adds to the combined score.
+                positions = np.arange(1, len(ranked) + 1)
+                scores[ranked] += 1 / (10 + positions)
+
+        top_chunks = np.argsort(-scores, kind="stable")[:k]
+        return [dict(self.passages[i], score=float(scores[i])) for i in top_chunks]
 
 
 def answer(endpoint, question, passages):
