@@ -127,24 +127,29 @@ def main():
     train, test = data(False), data(True)
     assert len(test) >= 50 and not {x for x, _ in train} & {x for x, _ in test}
 
-    def score(model, rows):
+    labels_in_order = list(CATEGORIES)
+
+    def label_scores(model, rows):
         prompts = [
             "Classify the Git request. A = stage; B = commit; C = branch; D = push.\n"
             f"Request: {request}\nAnswer:" for request, _ in rows
         ]
         batch = tokenizer(prompts, padding=True, return_tensors="pt")
-        end = batch.attention_mask.sum(1) - 1
+        # Read the next-token scores at the last real token of each prompt.
+        last_token = batch.attention_mask.sum(1) - 1
         logits = model(**batch, use_cache=False).logits
-        return logits[torch.arange(len(rows)), end][:, candidate_ids]
+        next_token_scores = logits[torch.arange(len(rows)), last_token]
+        return next_token_scores[:, candidate_ids]
 
     @torch.inference_mode()
     def predict(model):
         model.eval()
         predictions = []
         for i in range(0, len(test), 12):
-            predictions.extend(score(model, test[i:i + 12]).argmax(1).tolist())
-        return [list(CATEGORIES)[i] for i in predictions]
+            predictions.extend(label_scores(model, test[i:i + 12]).argmax(1).tolist())
+        return [labels_in_order[i] for i in predictions]
 
+    # Record the base predictions before attaching the trainable adapter.
     before = predict(base)
     adapted = get_peft_model(base, LoraConfig(
         task_type=TaskType.CAUSAL_LM, r=RANK, lora_alpha=ALPHA,
@@ -159,8 +164,8 @@ def main():
         epoch_losses = []
         for i in range(0, len(train), 12):
             rows = train[i:i + 12]
-            labels = torch.tensor([list(CATEGORIES).index(label) for _, label in rows])
-            loss = torch.nn.functional.cross_entropy(score(adapted, rows), labels)
+            labels = torch.tensor([labels_in_order.index(label) for _, label in rows])
+            loss = torch.nn.functional.cross_entropy(label_scores(adapted, rows), labels)
             optimizer.zero_grad(set_to_none=True)
             loss.backward()
             optimizer.step()
