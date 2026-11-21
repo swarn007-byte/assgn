@@ -60,11 +60,28 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--questions", type=Path, default=HERE / "questions.json",
                         help="JSON array of [question, PDF page, verbatim passage]")
-    parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--output", type=Path)
+    parser.add_argument("--ask", help="print one sourced answer")
+    parser.add_argument("--size", choices=(64, 160), type=int, default=160)
+    parser.add_argument("--selector", choices=("lexical", "llm"), default="lexical",
+                        help="quote selection method for --ask")
     args = parser.parse_args()
 
     torch.set_num_threads(4)
     pages = read_pages()
+    if args.ask:
+        vocab = {token for text in [*pages.values(), args.ask] for token in words(text)}
+        index = Retriever(pages, load_vectors(vocab), args.size)
+        options = candidate_quotes(index, args.ask)
+        if not options:
+            print(json.dumps({"answer": None, "page": None}))
+            return
+        choice = Selector().select(args.ask, options) if args.selector == "llm" else 0
+        text, page = options[choice]
+        print(json.dumps({"answer": text, "page": page}, ensure_ascii=False, indent=2))
+        return
+    if not args.output:
+        parser.error("--output is required when evaluating a question set")
     questions = json.loads(args.questions.read_text())
     if not questions:
         parser.error("the question set is empty")
