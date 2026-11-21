@@ -14,7 +14,9 @@ The evaluation records three answer figures. Lexical uses the first candidate
 under the lexical ordering. LLM uses the model's selection. The candidate
 ceiling counts questions for which any of the supplied quotes contains the
 gold passage. This shows when improving the selector alone cannot recover the
-required quote.
+required quote. In the 160-word run the model selected the exact gold quote for
+1/15 questions, lexical ordering for 3/15, and the candidate ceiling was 5/15.
+The single-question mode therefore defaults to lexical ordering.
 
 From the repository root, run:
 
@@ -23,6 +25,14 @@ From the repository root, run:
 .venv/bin/python task2_rag/train_selector.py
 .venv/bin/python task2_rag/evaluate_evidence.py --output .cache/evidence-dev.json
 ```
+
+Try the grounded answer path:
+
+```sh
+.venv/bin/python task2_rag/evaluate_evidence.py   --ask "What counts as tracked besides files from the last snapshot?"
+```
+
+Add `--selector llm` to test the trained selector in the same mode.
 
 ## Add an independently written set
 
