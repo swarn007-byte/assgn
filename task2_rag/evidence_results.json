@@ -1,0 +1,1160 @@
+{
+  "64": {
+    "retrieval_hits": 6,
+    "llm_exact": 0,
+    "lexical_exact": 3,
+    "oracle_exact": 5,
+    "total": 15,
+    "rows": [
+      {
+        "question": "How do I put an existing non-versioned directory under Git control, and what directory gets created?",
+        "gold_page": 32,
+        "gold": "$ git init This creates a new subdirectory named .git that contains all of your necessary repository files",
+        "retrieval_rank": null,
+        "candidates": [
+          {
+            "quote": "Initializing a Repository in an Existing Directory If you have a project directory that is currently not under version control and you want to start controlling it with Git, you first need",
+            "page": 32,
+            "exact_gold": false
+          },
+          {
+            "quote": "You can take a local directory that is currently not under version control, and turn it into a Git repository, or 2. You can clone an existing Git repository from elsewhere.",
+            "page": 32,
+            "exact_gold": false
+          },
+          {
+            "quote": "more information about exactly what files are contained in the .git directory you just created. If you want to start version-controlling existing files (as opposed to an empty directory), you should probably begin tracking those files and do an initial commit.",
+            "page": 33,
+            "exact_gold": false
+          },
+          {
+            "quote": "Getting a Git Repository You typically obtain a Git repository in one of two ways: 1. You can take a local directory that is currently not under version control, and turn it into a Git repository, or 2.",
+            "page": 32,
+            "exact_gold": false
+          }
+        ],
+        "llm_answer": {
+          "quote": "Getting a Git Repository You typically obtain a Git repository in one of two ways: 1. You can take a local directory that is currently not under version control, and turn it into a Git repository, or 2.",
+          "page": 32,
+          "exact_gold": false
+        },
+        "lexical_answer": {
+          "quote": "Initializing a Repository in an Existing Directory If you have a project directory that is currently not under version control and you want to start controlling it with Git, you first need",
+          "page": 32,
+          "exact_gold": false
+        }
+      },
+      {
+        "question": "What counts as tracked besides files from the last snapshot?",
+        "gold_page": 34,
+        "gold": "Tracked files are files that were in the last snapshot, as well as any newly staged files",
+        "retrieval_rank": 1,
+        "candidates": [
+          {
+            "quote": "Tracked files are files that were in the last snapshot, as well as any newly staged files; they can be unmodified, modified, or staged.",
+            "page": 34,
+            "exact_gold": true
+          },
+          {
+            "quote": "In short, tracked files are files that Git knows about. Untracked files are everything else — any files in your working directory that were not in your last snapshot and are not in your staging area.",
+            "page": 34,
+            "exact_gold": false
+          },
+          {
+            "quote": "Untracked files are everything else — any files in your working directory that were not in your last snapshot and are not in your staging area. When you first clone a repository, all of your files will be tracked and unmodified because Git just checked them",
+            "page": 34,
+            "exact_gold": false
+          },
+          {
+            "quote": "Remember that each file in your working directory can be in one of two states: tracked or untracked.",
+            "page": 34,
+            "exact_gold": false
+          }
+        ],
+        "llm_answer": {
+          "quote": "Untracked files are everything else — any files in your working directory that were not in your last snapshot and are not in your staging area. When you first clone a repository, all of your files will be tracked and unmodified because Git just checked them",
+          "page": 34,
+          "exact_gold": false
+        },
+        "lexical_answer": {
+          "quote": "Tracked files are files that were in the last snapshot, as well as any newly staged files; they can be unmodified, modified, or staged.",
+          "page": 34,
+          "exact_gold": true
+        }
+      },
+      {
+        "question": "What does git add do if I give it a folder instead of a file?",
+        "gold_page": 36,
+        "gold": "if it’s a directory, the command adds all the files in that directory recursively",
+        "retrieval_rank": null,
+        "candidates": [
+          {
+            "quote": "$ git add README Git figures out that it’s a rename implicitly, so it doesn’t matter if you rename a file that way or with the mv command. The only real difference is that git mv is one command instead of three — it’s a convenience function.",
+            "page": 46,
+            "exact_gold": false
+          },
+          {
+            "quote": "$ git add forgotten_file 46",
+            "page": 52,
+            "exact_gold": false
+          },
+          {
+            "quote": "As an example, if you commit and then realize you forgot to stage the changes in a file you wanted to add to this commit, you can do something like this: $ git commit -m 'Initial commit'",
+            "page": 52,
+            "exact_gold": false
+          },
+          {
+            "quote": "If you modify a file after you run git add, you have to run git",
+            "page": 37,
+            "exact_gold": false
+          }
+        ],
+        "llm_answer": {
+          "quote": "If you modify a file after you run git add, you have to run git",
+          "page": 37,
+          "exact_gold": false
+        },
+        "lexical_answer": {
+          "quote": "$ git add README Git figures out that it’s a rename implicitly, so it doesn’t matter if you rename a file that way or with the mv command. The only real difference is that git mv is one command instead of three — it’s a convenience function.",
+          "page": 46,
+          "exact_gold": false
+        }
+      },
+      {
+        "question": "When reading git status --short, which column represents the index and which represents working files?",
+        "gold_page": 38,
+        "gold": "the left- hand column indicates the status of the staging area and the right-hand column indicates the status of the working tree",
+        "retrieval_rank": 1,
+        "candidates": [
+          {
+            "quote": "the left- hand column indicates the status of the staging area and the right-hand column indicates the status of the working tree. So for example in that output, the README file is modified in the working directory but not yet staged, while the lib/simplegit.rb file is modified and staged.",
+            "page": 38,
+            "exact_gold": true
+          },
+          {
+            "quote": "next to them, new files that have been added to the staging area have an A, modified files have an M and so on. There are two columns to the output — the left- hand column indicates the status of the staging area and the right-hand column indicates",
+            "page": 38,
+            "exact_gold": false
+          },
+          {
+            "quote": "If you simply remove the file from your working directory, it shows up under the “Changes not staged for commit” (that is, unstaged) area of your git status output: $ rm PROJECTS.md",
+            "page": 44,
+            "exact_gold": false
+          },
+          {
+            "quote": "So for example in that output, the README file is modified in the working directory but not yet staged, while the lib/simplegit.rb file is modified and staged. The Rakefile was modified, staged and then modified again, so there are changes to it",
+            "page": 38,
+            "exact_gold": false
+          }
+        ],
+        "llm_answer": {
+          "quote": "So for example in that output, the README file is modified in the working directory but not yet staged, while the lib/simplegit.rb file is modified and staged. The Rakefile was modified, staged and then modified again, so there are changes to it",
+          "page": 38,
+          "exact_gold": false
+        },
+        "lexical_answer": {
+          "quote": "the left- hand column indicates the status of the staging area and the right-hand column indicates the status of the working tree. So for example in that output, the README file is modified in the working directory but not yet staged, while the lib/simplegit.rb file is modified and staged.",
+          "page": 38,
+          "exact_gold": true
+        }
+      },
+      {
+        "question": "How can an ignore pattern make an exception for one file?",
+        "gold_page": 38,
+        "gold": "You can negate a pattern by starting it with an exclamation point (!)",
+        "retrieval_rank": null,
+        "candidates": [
+          {
+            "quote": "In such cases, you can create a file listing patterns to match them named .gitignore. Here is an example .gitignore file: $ cat .gitignore *.[oa] *~ The first line tells Git to ignore any files ending in “.o” or “.a” — object and archive files that may be the",
+            "page": 38,
+            "exact_gold": false
+          },
+          {
+            "quote": "We’ll also show you how to set up Git to ignore certain files and file patterns, how to undo mistakes quickly and easily, how to browse the history of your project and view changes between commits, and how to push and pull from remote repositories.",
+            "page": 32,
+            "exact_gold": false
+          },
+          {
+            "quote": "The rules for the patterns you can put in the .gitignore file",
+            "page": 38,
+            "exact_gold": false
+          },
+          {
+            "quote": "generally automatically generated files such as log files or files produced by your build system. In such cases, you can create a file listing patterns to match them named .gitignore.",
+            "page": 38,
+            "exact_gold": false
+          }
+        ],
+        "llm_answer": {
+          "quote": "The rules for the patterns you can put in the .gitignore file",
+          "page": 38,
+          "exact_gold": false
+        },
+        "lexical_answer": {
+          "quote": "In such cases, you can create a file listing patterns to match them named .gitignore. Here is an example .gitignore file: $ cat .gitignore *.[oa] *~ The first line tells Git to ignore any files ending in “.o” or “.a” — object and archive files that may be the",
+          "page": 38,
+          "exact_gold": false
+        }
+      },
+      {
+        "question": "What are the two equivalent options to see the staged diff?",
+        "gold_page": 41,
+        "gold": "git diff --cached to see what you’ve staged so far (--staged and --cached are synonyms)",
+        "retrieval_rank": null,
+        "candidates": [
+          {
+            "quote": "If you want to see what you’ve staged that will go into your next commit, you can use git diff --staged.",
+            "page": 40,
+            "exact_gold": false
+          },
+          {
+            "quote": "see what you’ve changed but not yet staged, type git diff with no other arguments:",
+            "page": 40,
+            "exact_gold": false
+          },
+          {
+            "quote": "This command compares your staged changes to your last commit: $ git diff --staged diff --git a/README b/README new file mode 100644 index 0000000..03902a1 --- /dev/null +++ b/README",
+            "page": 40,
+            "exact_gold": false
+          },
+          {
+            "quote": "You’ve seen one such option already — the -2 option, which displays only the last two commits.",
+            "page": 50,
+            "exact_gold": false
+          }
+        ],
+        "llm_answer": {
+          "quote": "If you want to see what you’ve staged that will go into your next commit, you can use git diff --staged.",
+          "page": 40,
+          "exact_gold": false
+        },
+        "lexical_answer": {
+          "quote": "If you want to see what you’ve staged that will go into your next commit, you can use git diff --staged.",
+          "page": 40,
+          "exact_gold": false
+        }
+      },
+      {
+        "question": "How can I bypass the add step for already tracked changes when committing?",
+        "gold_page": 43,
+        "gold": "Adding the -a option to the git commit command makes Git automatically stage every file that is already tracked before doing the commit",
+        "retrieval_rank": null,
+        "candidates": [
+          {
+            "quote": "directory, the command adds all the files in that directory recursively. Staging Modified Files Let’s change a file that was already tracked.",
+            "page": 36,
+            "exact_gold": false
+          },
+          {
+            "quote": "is already tracked before doing the commit, letting you skip the git add part:",
+            "page": 43,
+            "exact_gold": false
+          },
+          {
+            "quote": "Staging Modified Files Let’s change a file that was already tracked. If you change a previously tracked file called CONTRIBUTING.md and then run your git status command again, you get something that looks like this:",
+            "page": 36,
+            "exact_gold": false
+          },
+          {
+            "quote": "Doing so also puts the diff of your change in the editor so you can see exactly what changes you’re committing.",
+            "page": 43,
+            "exact_gold": false
+          }
+        ],
+        "llm_answer": {
+          "quote": "is already tracked before doing the commit, letting you skip the git add part:",
+          "page": 43,
+          "exact_gold": false
+        },
+        "lexical_answer": {
+          "quote": "directory, the command adds all the files in that directory recursively. Staging Modified Files Let’s change a file that was already tracked.",
+          "page": 36,
+          "exact_gold": false
+        }
+      },
+      {
+        "question": "How can I untrack README but leave the file on disk?",
+        "gold_page": 45,
+        "gold": "To do this, use the --cached option: $ git rm --cached README",
+        "retrieval_rank": null,
+        "candidates": [
+          {
+            "quote": "Internals, but you can generally leave it off.",
+            "page": 98,
+            "exact_gold": false
+          },
+          {
+            "quote": "Untracked files: (use \"git add <file>...\" to include in what will be committed) README nothing added to commit but untracked files present (use \"git add\" to track) You can see that your new README file is untracked, because it’s under the “Untracked files”",
+            "page": 35,
+            "exact_gold": false
+          },
+          {
+            "quote": "file like so: $ echo 'My Project' > README",
+            "page": 35,
+            "exact_gold": false
+          },
+          {
+            "quote": "In fact, if your server disk gets corrupted, you can often use nearly any of the clones on any client to set the server back to the state it was in when it was cloned (you may lose some server-side hooks and such, but all the versioned data would be there",
+            "page": 33,
+            "exact_gold": false
+          }
+        ],
+        "llm_answer": {
+          "quote": "In fact, if your server disk gets corrupted, you can often use nearly any of the clones on any client to set the server back to the state it was in when it was cloned (you may lose some server-side hooks and such, but all the versioned data would be there",
+          "page": 33,
+          "exact_gold": false
+        },
+        "lexical_answer": {
+          "quote": "Internals, but you can generally leave it off.",
+          "page": 98,
+          "exact_gold": false
+        }
+      },
+      {
+        "question": "Is git mv fundamentally different from moving a file and staging the old and new paths yourself?",
+        "gold_page": 46,
+        "gold": "git mv is one command instead of three — it’s a convenience function",
+        "retrieval_rank": null,
+        "candidates": [
+          {
+            "quote": "$ git mv file_from file_to and it works fine.",
+            "page": 45,
+            "exact_gold": false
+          },
+          {
+            "quote": "The git add command takes a path name for either a file or a directory; if it’s a directory, the command adds all the files in that directory recursively. Staging Modified Files Let’s change",
+            "page": 36,
+            "exact_gold": false
+          },
+          {
+            "quote": "Thus it’s a bit confusing that Git has a mv command. If you want to rename a file in Git, you can run something like:",
+            "page": 45,
+            "exact_gold": false
+          },
+          {
+            "quote": "However, Git is pretty smart about figuring that out after the fact — we’ll deal with detecting file movement a bit later. Thus it’s a bit confusing that Git has a mv command.",
+            "page": 45,
+            "exact_gold": false
+          }
+        ],
+        "llm_answer": {
+          "quote": "$ git mv file_from file_to and it works fine.",
+          "page": 45,
+          "exact_gold": false
+        },
+        "lexical_answer": {
+          "quote": "$ git mv file_from file_to and it works fine.",
+          "page": 45,
+          "exact_gold": false
+        }
+      },
+      {
+        "question": "Which log option shows the patch introduced by each change?",
+        "gold_page": 47,
+        "gold": "-p or --patch, which shows the difference (the patch output) introduced in each commit",
+        "retrieval_rank": 5,
+        "candidates": [
+          {
+            "quote": "Common options to git log Option Description -p Show the patch introduced with each commit.",
+            "page": 50,
+            "exact_gold": false
+          },
+          {
+            "quote": "One of the more helpful options is -p or --patch, which shows the difference (the patch output) introduced in each commit.",
+            "page": 47,
+            "exact_gold": true
+          },
+          {
+            "quote": "If you specify a directory or file name, you can limit the log output to commits that introduced a change to those files. This is always the last option and is generally preceded by double dashes (--) to separate",
+            "page": 51,
+            "exact_gold": false
+          },
+          {
+            "quote": "$ git log -S function_name The last really useful option to pass to git log as a filter is a path. If you specify a directory or file name, you can limit the log output to commits that introduced a change to those files.",
+            "page": 51,
+            "exact_gold": false
+          }
+        ],
+        "llm_answer": {
+          "quote": "Common options to git log Option Description -p Show the patch introduced with each commit.",
+          "page": 50,
+          "exact_gold": false
+        },
+        "lexical_answer": {
+          "quote": "Common options to git log Option Description -p Show the patch introduced with each commit.",
+          "page": 50,
+          "exact_gold": false
+        }
+      },
+      {
+        "question": "Which log filters accept a lower bound for the commit date?",
+        "gold_page": 51,
+        "gold": "--since, --after Limit the commits to those made after the specified date",
+        "retrieval_rank": 2,
+        "candidates": [
+          {
+            "quote": "$ git log -S function_name The last really useful option to pass to git log as a filter is a path. If you specify a directory or file name, you can limit the log output to commits that introduced a change to those files.",
+            "page": 51,
+            "exact_gold": false
+          },
+          {
+            "quote": "function, you could call: $ git log -S function_name The last really useful option to pass to git log as a filter is a path.",
+            "page": 51,
+            "exact_gold": false
+          },
+          {
+            "quote": "Options to limit the output of git log Option Description -<n> Show only the last n commits. --since, --after Limit the commits to those made after the specified date.",
+            "page": 51,
+            "exact_gold": true
+          },
+          {
+            "quote": "You can also filter the list to commits that match some search criteria.",
+            "page": 51,
+            "exact_gold": false
+          }
+        ],
+        "llm_answer": {
+          "quote": "$ git log -S function_name The last really useful option to pass to git log as a filter is a path. If you specify a directory or file name, you can limit the log output to commits that introduced a change to those files.",
+          "page": 51,
+          "exact_gold": false
+        },
+        "lexical_answer": {
+          "quote": "$ git log -S function_name The last really useful option to pass to git log as a filter is a path. If you specify a directory or file name, you can limit the log output to commits that introduced a change to those files.",
+          "page": 51,
+          "exact_gold": false
+        }
+      },
+      {
+        "question": "When I amend the latest commit, does the previous commit remain in the branch history?",
+        "gold_page": 53,
+        "gold": "You end up with a single commit — the second commit replaces the results of the first",
+        "retrieval_rank": null,
+        "candidates": [
+          {
+            "quote": "last commit, without cluttering your repository history with commit messages of the form, “Oops, forgot to add a file” or “Darn, fixing a typo in last commit”. Only amend commits that are still local and have not been pushed somewhere.",
+            "page": 53,
+            "exact_gold": false
+          },
+          {
+            "quote": "Only amend commits that are still local and have not been pushed somewhere. Amending previously pushed commits and force pushing the branch will cause  problems for your collaborators.",
+            "page": 53,
+            "exact_gold": false
+          },
+          {
+            "quote": "Effectively, it’s as if the previous commit never happened, and it won’t show up in  your repository history.",
+            "page": 53,
+            "exact_gold": false
+          },
+          {
+            "quote": "The obvious value to amending commits is to make minor improvements to your last commit, without cluttering your repository history with commit messages of the form, “Oops, forgot to",
+            "page": 53,
+            "exact_gold": false
+          }
+        ],
+        "llm_answer": {
+          "quote": "Effectively, it’s as if the previous commit never happened, and it won’t show up in  your repository history.",
+          "page": 53,
+          "exact_gold": false
+        },
+        "lexical_answer": {
+          "quote": "last commit, without cluttering your repository history with commit messages of the form, “Oops, forgot to add a file” or “Darn, fixing a typo in last commit”. Only amend commits that are still local and have not been pushed somewhere.",
+          "page": 53,
+          "exact_gold": false
+        }
+      },
+      {
+        "question": "How do I list the fetch and push URLs behind each remote nickname?",
+        "gold_page": 57,
+        "gold": "You can also specify -v, which shows you the URLs that Git has stored for the shortname to be used when reading and writing to that remote: $ git remote -v",
+        "retrieval_rank": null,
+        "candidates": [
+          {
+            "quote": "If you want totally up to date ahead and behind numbers, you’ll need to fetch from all your remotes right before running this.",
+            "page": 100,
+            "exact_gold": false
+          },
+          {
+            "quote": "$ git remote -v origin https://github.com/schacon/ticgit (fetch) origin https://github.com/schacon/ticgit (push) pb https://github.com/paulboone/ticgit (fetch) pb https://github.com/paulboone/ticgit (push) Now you can use the string pb on the command line instead of the whole URL.",
+            "page": 58,
+            "exact_gold": false
+          },
+          {
+            "quote": "add <shortname> <url>: $ git remote origin",
+            "page": 58,
+            "exact_gold": false
+          },
+          {
+            "quote": "You’ll have to fetch their work first and incorporate it into yours before you’ll be allowed to push. See Git Branching for more detailed information on how to push to remote servers.",
+            "page": 59,
+            "exact_gold": false
+          }
+        ],
+        "llm_answer": {
+          "quote": "add <shortname> <url>: $ git remote origin",
+          "page": 58,
+          "exact_gold": false
+        },
+        "lexical_answer": {
+          "quote": "If you want totally up to date ahead and behind numbers, you’ll need to fetch from all your remotes right before running this.",
+          "page": 100,
+          "exact_gold": false
+        }
+      },
+      {
+        "question": "Which git tag flag creates the annotated kind?",
+        "gold_page": 62,
+        "gold": "The easiest way is to specify -a when you run the tag command",
+        "retrieval_rank": 2,
+        "candidates": [
+          {
+            "quote": "Creating Tags Git supports two types of tags: lightweight and annotated.",
+            "page": 62,
+            "exact_gold": false
+          },
+          {
+            "quote": "Annotated tags, however, are stored as full objects in the Git database.",
+            "page": 62,
+            "exact_gold": false
+          },
+          {
+            "quote": "Annotated Tags Creating an annotated tag in Git is simple.",
+            "page": 62,
+            "exact_gold": false
+          },
+          {
+            "quote": "It’s generally recommended that you create annotated tags so you can have all this information; but if you want a temporary tag or for some",
+            "page": 62,
+            "exact_gold": false
+          }
+        ],
+        "llm_answer": {
+          "quote": "Creating Tags Git supports two types of tags: lightweight and annotated.",
+          "page": 62,
+          "exact_gold": false
+        },
+        "lexical_answer": {
+          "quote": "Creating Tags Git supports two types of tags: lightweight and annotated.",
+          "page": 62,
+          "exact_gold": false
+        }
+      },
+      {
+        "question": "How do I abbreviate checkout to co across my repositories?",
+        "gold_page": 67,
+        "gold": "git config --global alias.co checkout",
+        "retrieval_rank": 1,
+        "candidates": [
+          {
+            "quote": "$ git config --global alias.co checkout",
+            "page": 67,
+            "exact_gold": true
+          },
+          {
+            "quote": "You can also do git push origin serverfix:serverfix, which does the same thing — it says, “Take my serverfix and make it the remote’s serverfix.” You can use this format to push a local branch into a remote branch that is named differently.",
+            "page": 98,
+            "exact_gold": false
+          },
+          {
+            "quote": "Remote repositories are versions of your project that are hosted on the Internet or network somewhere.",
+            "page": 56,
+            "exact_gold": false
+          },
+          {
+            "quote": "Working with Remotes To be able to collaborate on any Git project, you need to know how to manage your remote repositories.",
+            "page": 56,
+            "exact_gold": false
+          }
+        ],
+        "llm_answer": {
+          "quote": "You can also do git push origin serverfix:serverfix, which does the same thing — it says, “Take my serverfix and make it the remote’s serverfix.” You can use this format to push a local branch into a remote branch that is named differently.",
+          "page": 98,
+          "exact_gold": false
+        },
+        "lexical_answer": {
+          "quote": "$ git config --global alias.co checkout",
+          "page": 67,
+          "exact_gold": true
+        }
+      }
+    ]
+  },
+  "160": {
+    "retrieval_hits": 9,
+    "llm_exact": 1,
+    "lexical_exact": 3,
+    "oracle_exact": 5,
+    "total": 15,
+    "rows": [
+      {
+        "question": "How do I put an existing non-versioned directory under Git control, and what directory gets created?",
+        "gold_page": 32,
+        "gold": "$ git init This creates a new subdirectory named .git that contains all of your necessary repository files",
+        "retrieval_rank": 3,
+        "candidates": [
+          {
+            "quote": "You can take a local directory that is currently not under version control, and turn it into a Git repository, or 2. You can clone an existing Git repository from elsewhere.",
+            "page": 32,
+            "exact_gold": false
+          },
+          {
+            "quote": "Initializing a Repository in an Existing Directory If you have a project directory that is currently not under version control and you want to start controlling it with Git, you first need to go to that project’s directory.",
+            "page": 32,
+            "exact_gold": false
+          },
+          {
+            "quote": "Getting a Git Repository You typically obtain a Git repository in one of two ways: 1. You can take a local directory that is currently not under version control, and turn it into a Git repository, or 2.",
+            "page": 32,
+            "exact_gold": false
+          },
+          {
+            "quote": "more information about exactly what files are contained in the .git directory you just created. If you want to start version-controlling existing files (as opposed to an empty directory), you should probably begin tracking those files and do an initial commit.",
+            "page": 33,
+            "exact_gold": false
+          }
+        ],
+        "llm_answer": {
+          "quote": "Getting a Git Repository You typically obtain a Git repository in one of two ways: 1. You can take a local directory that is currently not under version control, and turn it into a Git repository, or 2.",
+          "page": 32,
+          "exact_gold": false
+        },
+        "lexical_answer": {
+          "quote": "You can take a local directory that is currently not under version control, and turn it into a Git repository, or 2. You can clone an existing Git repository from elsewhere.",
+          "page": 32,
+          "exact_gold": false
+        }
+      },
+      {
+        "question": "What counts as tracked besides files from the last snapshot?",
+        "gold_page": 34,
+        "gold": "Tracked files are files that were in the last snapshot, as well as any newly staged files",
+        "retrieval_rank": 1,
+        "candidates": [
+          {
+            "quote": "Tracked files are files that were in the last snapshot, as well as any newly staged files; they can be unmodified, modified, or staged.",
+            "page": 34,
+            "exact_gold": true
+          },
+          {
+            "quote": "In short, tracked files are files that Git knows about. Untracked files are everything else — any files in your working directory that were not in your last snapshot and are not in your staging area.",
+            "page": 34,
+            "exact_gold": false
+          },
+          {
+            "quote": "Untracked files are everything else — any files in your working directory that were not in your last snapshot and are not in your staging area. When you first clone a repository, all of your files will be tracked and unmodified because Git just checked them",
+            "page": 34,
+            "exact_gold": false
+          },
+          {
+            "quote": "any files in your working directory that were not in your last snapshot and are not in your staging area. When you first clone a repository, all of your files will be tracked and unmodified because Git just checked them out and you haven’t edited anything.",
+            "page": 34,
+            "exact_gold": false
+          }
+        ],
+        "llm_answer": {
+          "quote": "Untracked files are everything else — any files in your working directory that were not in your last snapshot and are not in your staging area. When you first clone a repository, all of your files will be tracked and unmodified because Git just checked them",
+          "page": 34,
+          "exact_gold": false
+        },
+        "lexical_answer": {
+          "quote": "Tracked files are files that were in the last snapshot, as well as any newly staged files; they can be unmodified, modified, or staged.",
+          "page": 34,
+          "exact_gold": true
+        }
+      },
+      {
+        "question": "What does git add do if I give it a folder instead of a file?",
+        "gold_page": 36,
+        "gold": "if it’s a directory, the command adds all the files in that directory recursively",
+        "retrieval_rank": null,
+        "candidates": [
+          {
+            "quote": "$ git add README Git figures out that it’s a rename implicitly, so it doesn’t matter if you rename a file that way or with the mv command. The only real difference is that git mv is one command instead of three — it’s a convenience function.",
+            "page": 46,
+            "exact_gold": false
+          },
+          {
+            "quote": "The only real difference is that git mv is one command instead of three — it’s a convenience function. More importantly, you can use any tool you like to rename a file, and address the add/rm later, before you commit.",
+            "page": 46,
+            "exact_gold": false
+          },
+          {
+            "quote": "$ git rm README.md $ git add README Git figures out that it’s a rename implicitly, so it doesn’t matter if you rename a file that way or with the mv command.",
+            "page": 46,
+            "exact_gold": false
+          },
+          {
+            "quote": "If you run git difftool instead of git diff, you can view any of these diffs in software like emerge, vimdiff and many more (including commercial products).",
+            "page": 42,
+            "exact_gold": false
+          }
+        ],
+        "llm_answer": {
+          "quote": "If you run git difftool instead of git diff, you can view any of these diffs in software like emerge, vimdiff and many more (including commercial products).",
+          "page": 42,
+          "exact_gold": false
+        },
+        "lexical_answer": {
+          "quote": "$ git add README Git figures out that it’s a rename implicitly, so it doesn’t matter if you rename a file that way or with the mv command. The only real difference is that git mv is one command instead of three — it’s a convenience function.",
+          "page": 46,
+          "exact_gold": false
+        }
+      },
+      {
+        "question": "When reading git status --short, which column represents the index and which represents working files?",
+        "gold_page": 38,
+        "gold": "the left- hand column indicates the status of the staging area and the right-hand column indicates the status of the working tree",
+        "retrieval_rank": 1,
+        "candidates": [
+          {
+            "quote": "next to them, new files that have been added to the staging area have an A, modified files have an M and so on. There are two columns to the output — the left- hand column indicates the status of the staging area and the right-hand column indicates the status of the working tree.",
+            "page": 38,
+            "exact_gold": true
+          },
+          {
+            "quote": "There are two columns to the output — the left- hand column indicates the status of the staging area and the right-hand column indicates the status of the working tree. So for example in that output, the README file is modified in the working directory but not yet staged, while the lib/simplegit.rb file is modified and staged.",
+            "page": 38,
+            "exact_gold": true
+          },
+          {
+            "quote": "reset HEAD <file>...\" to unstage) new file: README modified: CONTRIBUTING.md Short Status While the git status output is pretty comprehensive, it’s also quite wordy.",
+            "page": 37,
+            "exact_gold": false
+          },
+          {
+            "quote": "So for example in that output, the README file is modified in the working directory but not yet staged, while the lib/simplegit.rb file is modified and staged. The Rakefile was modified, staged and then modified again, so there are changes to it that are both staged and unstaged.",
+            "page": 38,
+            "exact_gold": false
+          }
+        ],
+        "llm_answer": {
+          "quote": "There are two columns to the output — the left- hand column indicates the status of the staging area and the right-hand column indicates the status of the working tree. So for example in that output, the README file is modified in the working directory but not yet staged, while the lib/simplegit.rb file is modified and staged.",
+          "page": 38,
+          "exact_gold": true
+        },
+        "lexical_answer": {
+          "quote": "next to them, new files that have been added to the staging area have an A, modified files have an M and so on. There are two columns to the output — the left- hand column indicates the status of the staging area and the right-hand column indicates the status of the working tree.",
+          "page": 38,
+          "exact_gold": true
+        }
+      },
+      {
+        "question": "How can an ignore pattern make an exception for one file?",
+        "gold_page": 38,
+        "gold": "You can negate a pattern by starting it with an exclamation point (!)",
+        "retrieval_rank": 2,
+        "candidates": [
+          {
+            "quote": "In such cases, you can create a file listing patterns to match them named .gitignore. Here is an example .gitignore file: $ cat .gitignore *.[oa] *~ The first line tells Git to ignore any files ending in “.o” or “.a” — object and archive files that may be the product of building your code.",
+            "page": 38,
+            "exact_gold": false
+          },
+          {
+            "quote": "The rules for the patterns you can put in the .gitignore file are as follows: • Blank lines or lines starting with # are ignored.",
+            "page": 38,
+            "exact_gold": false
+          },
+          {
+            "quote": "You can specify more than one instance of both the --author and --grep search criteria, which will limit the commit output to commits that match any of the  --author patterns and any of the --grep patterns; however, adding the --all-match option further limits the output to just those commits that match all --grep patterns.",
+            "page": 51,
+            "exact_gold": false
+          },
+          {
+            "quote": "The second line tells Git to ignore all files whose names end with a tilde (~), which is used by many text editors such as Emacs to mark temporary files.",
+            "page": 38,
+            "exact_gold": false
+          }
+        ],
+        "llm_answer": {
+          "quote": "In such cases, you can create a file listing patterns to match them named .gitignore. Here is an example .gitignore file: $ cat .gitignore *.[oa] *~ The first line tells Git to ignore any files ending in “.o” or “.a” — object and archive files that may be the product of building your code.",
+          "page": 38,
+          "exact_gold": false
+        },
+        "lexical_answer": {
+          "quote": "In such cases, you can create a file listing patterns to match them named .gitignore. Here is an example .gitignore file: $ cat .gitignore *.[oa] *~ The first line tells Git to ignore any files ending in “.o” or “.a” — object and archive files that may be the product of building your code.",
+          "page": 38,
+          "exact_gold": false
+        }
+      },
+      {
+        "question": "What are the two equivalent options to see the staged diff?",
+        "gold_page": 41,
+        "gold": "git diff --cached to see what you’ve staged so far (--staged and --cached are synonyms)",
+        "retrieval_rank": null,
+        "candidates": [
+          {
+            "quote": "If you want to see what you’ve staged that will go into your next commit, you can use git diff --staged.",
+            "page": 40,
+            "exact_gold": false
+          },
+          {
+            "quote": "We’ll cover git diff in more detail later, but you’ll probably use it most often to answer these two questions: What have you changed but not yet staged?",
+            "page": 39,
+            "exact_gold": false
+          },
+          {
+            "quote": "Changes to be committed: (use \"git reset HEAD <file>...\" to unstage) modified: README Changes not staged for commit: (use \"git add <file>...\" to update what will be committed) (use \"git checkout -- <file>...\" to discard changes in working directory) modified: CONTRIBUTING.md To see what you’ve changed but not yet staged, type git diff with no other arguments:",
+            "page": 40,
+            "exact_gold": false
+          },
+          {
+            "quote": "It is beyond the scope of this book to get into the details of multiple .gitignore files; see man gitignore for the details. Viewing Your Staged and Unstaged Changes If the git status command is too vague for you — you want to know exactly what you changed, not just which files were changed — you can use the git diff command.",
+            "page": 39,
+            "exact_gold": false
+          }
+        ],
+        "llm_answer": {
+          "quote": "It is beyond the scope of this book to get into the details of multiple .gitignore files; see man gitignore for the details. Viewing Your Staged and Unstaged Changes If the git status command is too vague for you — you want to know exactly what you changed, not just which files were changed — you can use the git diff command.",
+          "page": 39,
+          "exact_gold": false
+        },
+        "lexical_answer": {
+          "quote": "If you want to see what you’ve staged that will go into your next commit, you can use git diff --staged.",
+          "page": 40,
+          "exact_gold": false
+        }
+      },
+      {
+        "question": "How can I bypass the add step for already tracked changes when committing?",
+        "gold_page": 43,
+        "gold": "Adding the -a option to the git commit command makes Git automatically stage every file that is already tracked before doing the commit",
+        "retrieval_rank": 5,
+        "candidates": [
+          {
+            "quote": "Staging Modified Files Let’s change a file that was already tracked.",
+            "page": 36,
+            "exact_gold": false
+          },
+          {
+            "quote": "Adding the -a option to the git commit command makes Git automatically stage every file that is already tracked before doing the commit, letting you skip the git add part:",
+            "page": 43,
+            "exact_gold": true
+          },
+          {
+            "quote": "Let’s retrace our steps, and undo things with git restore instead of",
+            "page": 55,
+            "exact_gold": false
+          },
+          {
+            "quote": "will be gone and no longer tracked. If you modified the file or had already added it to the staging area, you must force the removal with the -f option.",
+            "page": 44,
+            "exact_gold": false
+          }
+        ],
+        "llm_answer": {
+          "quote": "will be gone and no longer tracked. If you modified the file or had already added it to the staging area, you must force the removal with the -f option.",
+          "page": 44,
+          "exact_gold": false
+        },
+        "lexical_answer": {
+          "quote": "Staging Modified Files Let’s change a file that was already tracked.",
+          "page": 36,
+          "exact_gold": false
+        }
+      },
+      {
+        "question": "How can I untrack README but leave the file on disk?",
+        "gold_page": 45,
+        "gold": "To do this, use the --cached option: $ git rm --cached README",
+        "retrieval_rank": null,
+        "candidates": [
+          {
+            "quote": "Internals, but you can generally leave it off.",
+            "page": 98,
+            "exact_gold": false
+          },
+          {
+            "quote": "Untracked files: (use \"git add <file>...\" to include in what will be committed) README nothing added to commit but untracked files present (use \"git add\" to track) You can see that your new README file is untracked, because it’s under the “Untracked files” heading in your status output.",
+            "page": 35,
+            "exact_gold": false
+          },
+          {
+            "quote": "new file to your project, a simple README file.",
+            "page": 35,
+            "exact_gold": false
+          },
+          {
+            "quote": "renamed: README.md -> README Changes not staged for commit: (use \"git add <file>...\" to update what will be committed) (use \"git checkout -- <file>...\" to discard changes in working directory) modified: CONTRIBUTING.md The command is a bit strange, but it works.",
+            "page": 54,
+            "exact_gold": false
+          }
+        ],
+        "llm_answer": {
+          "quote": "new file to your project, a simple README file.",
+          "page": 35,
+          "exact_gold": false
+        },
+        "lexical_answer": {
+          "quote": "Internals, but you can generally leave it off.",
+          "page": 98,
+          "exact_gold": false
+        }
+      },
+      {
+        "question": "Is git mv fundamentally different from moving a file and staging the old and new paths yourself?",
+        "gold_page": 46,
+        "gold": "git mv is one command instead of three — it’s a convenience function",
+        "retrieval_rank": null,
+        "candidates": [
+          {
+            "quote": "$ git mv file_from file_to and it works fine.",
+            "page": 45,
+            "exact_gold": false
+          },
+          {
+            "quote": "$ git mv README.md README",
+            "page": 45,
+            "exact_gold": false
+          },
+          {
+            "quote": "Thus it’s a bit confusing that Git has a mv command. If you want to rename a file in Git, you can run something like:",
+            "page": 45,
+            "exact_gold": false
+          },
+          {
+            "quote": "Changes to be committed: (use \"git reset HEAD <file>...\" to unstage) renamed: README.md -> README However, this is equivalent to running something like this: $ mv README.md README 39",
+            "page": 45,
+            "exact_gold": false
+          }
+        ],
+        "llm_answer": {
+          "quote": "$ git mv file_from file_to and it works fine.",
+          "page": 45,
+          "exact_gold": false
+        },
+        "lexical_answer": {
+          "quote": "$ git mv file_from file_to and it works fine.",
+          "page": 45,
+          "exact_gold": false
+        }
+      },
+      {
+        "question": "Which log option shows the patch introduced by each change?",
+        "gold_page": 47,
+        "gold": "-p or --patch, which shows the difference (the patch output) introduced in each commit",
+        "retrieval_rank": null,
+        "candidates": [
+          {
+            "quote": "Common options to git log Option Description -p Show the patch introduced with each commit.",
+            "page": 50,
+            "exact_gold": false
+          },
+          {
+            "quote": "$ git log -S function_name The last really useful option to pass to git log as a filter is a path. If you specify a directory or file name, you can limit the log output to commits that introduced a change to those files.",
+            "page": 51,
+            "exact_gold": false
+          },
+          {
+            "quote": "If you specify a directory or file name, you can limit the log output to commits that introduced a change to those files. This is always the last option and is generally preceded by double dashes (--) to separate the paths from the options:",
+            "page": 51,
+            "exact_gold": false
+          },
+          {
+            "quote": "Options to limit the output of git log Option Description -<n> Show only the last n commits.",
+            "page": 51,
+            "exact_gold": false
+          }
+        ],
+        "llm_answer": {
+          "quote": "Common options to git log Option Description -p Show the patch introduced with each commit.",
+          "page": 50,
+          "exact_gold": false
+        },
+        "lexical_answer": {
+          "quote": "Common options to git log Option Description -p Show the patch introduced with each commit.",
+          "page": 50,
+          "exact_gold": false
+        }
+      },
+      {
+        "question": "Which log filters accept a lower bound for the commit date?",
+        "gold_page": 51,
+        "gold": "--since, --after Limit the commits to those made after the specified date",
+        "retrieval_rank": 1,
+        "candidates": [
+          {
+            "quote": "For instance, if you wanted to find the last commit that added or removed a reference to a specific function, you could call: $ git log -S function_name The last really useful option to pass to git log as a filter is a path.",
+            "page": 51,
+            "exact_gold": false
+          },
+          {
+            "quote": "$ git log -S function_name The last really useful option to pass to git log as a filter is a path. If you specify a directory or file name, you can limit the log output to commits that introduced a change to those files.",
+            "page": 51,
+            "exact_gold": false
+          },
+          {
+            "quote": "Options to limit the output of git log Option Description -<n> Show only the last n commits. --since, --after Limit the commits to those made after the specified date.",
+            "page": 51,
+            "exact_gold": true
+          },
+          {
+            "quote": "For example, this command gets the list of commits made in the last two weeks: $ git log --since=2.weeks This command works with lots of formats — you can specify a specific date like \"2008-01-15\", or a relative date such as \"2 years 1 day 3 minutes ago\".",
+            "page": 50,
+            "exact_gold": false
+          }
+        ],
+        "llm_answer": {
+          "quote": "For instance, if you wanted to find the last commit that added or removed a reference to a specific function, you could call: $ git log -S function_name The last really useful option to pass to git log as a filter is a path.",
+          "page": 51,
+          "exact_gold": false
+        },
+        "lexical_answer": {
+          "quote": "For instance, if you wanted to find the last commit that added or removed a reference to a specific function, you could call: $ git log -S function_name The last really useful option to pass to git log as a filter is a path.",
+          "page": 51,
+          "exact_gold": false
+        }
+      },
+      {
+        "question": "When I amend the latest commit, does the previous commit remain in the branch history?",
+        "gold_page": 53,
+        "gold": "You end up with a single commit — the second commit replaces the results of the first",
+        "retrieval_rank": 1,
+        "candidates": [
+          {
+            "quote": "The obvious value to amending commits is to make minor improvements to your last commit, without cluttering your repository history with commit messages of the form, “Oops, forgot to add a file” or “Darn, fixing a typo in last commit”. Only amend commits that are still local and have not been pushed somewhere.",
+            "page": 53,
+            "exact_gold": false
+          },
+          {
+            "quote": "Only amend commits that are still local and have not been pushed somewhere. Amending previously pushed commits and force pushing the branch will cause  problems for your collaborators.",
+            "page": 53,
+            "exact_gold": false
+          },
+          {
+            "quote": "Effectively, it’s as if the previous commit never happened, and it won’t show up in  your repository history.",
+            "page": 53,
+            "exact_gold": false
+          },
+          {
+            "quote": "If you modify a file after you run git add, you have to run git add again to stage the latest version of the file:",
+            "page": 37,
+            "exact_gold": false
+          }
+        ],
+        "llm_answer": {
+          "quote": "Only amend commits that are still local and have not been pushed somewhere. Amending previously pushed commits and force pushing the branch will cause  problems for your collaborators.",
+          "page": 53,
+          "exact_gold": false
+        },
+        "lexical_answer": {
+          "quote": "The obvious value to amending commits is to make minor improvements to your last commit, without cluttering your repository history with commit messages of the form, “Oops, forgot to add a file” or “Darn, fixing a typo in last commit”. Only amend commits that are still local and have not been pushed somewhere.",
+          "page": 53,
+          "exact_gold": false
+        }
+      },
+      {
+        "question": "How do I list the fetch and push URLs behind each remote nickname?",
+        "gold_page": 57,
+        "gold": "You can also specify -v, which shows you the URLs that Git has stored for the shortname to be used when reading and writing to that remote: $ git remote -v",
+        "retrieval_rank": null,
+        "candidates": [
+          {
+            "quote": "If you want totally up to date ahead and behind numbers, you’ll need to fetch from all your remotes right before running this.",
+            "page": 100,
+            "exact_gold": false
+          },
+          {
+            "quote": "This will list out your local branches with more information including what each branch is tracking and if your local branch is ahead, behind or both.",
+            "page": 100,
+            "exact_gold": false
+          },
+          {
+            "quote": "You’ll have to fetch their work first and incorporate it into yours before you’ll be allowed to push. See Git Branching for more detailed information on how to push to remote servers.",
+            "page": 59,
+            "exact_gold": false
+          },
+          {
+            "quote": "Next we can see that our serverfix branch is tracking the server-fix-good branch on our teamone server and is ahead by three and behind by one, meaning that there is one commit on the server we haven’t merged in yet and three commits locally that we haven’t pushed. Finally we can see that our testing branch is not tracking any remote branch.",
+            "page": 100,
+            "exact_gold": false
+          }
+        ],
+        "llm_answer": {
+          "quote": "You’ll have to fetch their work first and incorporate it into yours before you’ll be allowed to push. See Git Branching for more detailed information on how to push to remote servers.",
+          "page": 59,
+          "exact_gold": false
+        },
+        "lexical_answer": {
+          "quote": "If you want totally up to date ahead and behind numbers, you’ll need to fetch from all your remotes right before running this.",
+          "page": 100,
+          "exact_gold": false
+        }
+      },
+      {
+        "question": "Which git tag flag creates the annotated kind?",
+        "gold_page": 62,
+        "gold": "The easiest way is to specify -a when you run the tag command",
+        "retrieval_rank": 3,
+        "candidates": [
+          {
+            "quote": "--tags will push both lightweight and annotated tags.",
+            "page": 65,
+            "exact_gold": false
+          },
+          {
+            "quote": "Creating Tags Git supports two types of tags: lightweight and annotated.",
+            "page": 62,
+            "exact_gold": false
+          },
+          {
+            "quote": "It’s generally recommended that you create annotated tags so you can have all this information; but if you want a temporary tag or for some",
+            "page": 62,
+            "exact_gold": false
+          },
+          {
+            "quote": "Annotated tags, however, are stored as full objects in the Git database.",
+            "page": 62,
+            "exact_gold": false
+          }
+        ],
+        "llm_answer": {
+          "quote": "Annotated tags, however, are stored as full objects in the Git database.",
+          "page": 62,
+          "exact_gold": false
+        },
+        "lexical_answer": {
+          "quote": "--tags will push both lightweight and annotated tags.",
+          "page": 65,
+          "exact_gold": false
+        }
+      },
+      {
+        "question": "How do I abbreviate checkout to co across my repositories?",
+        "gold_page": 67,
+        "gold": "git config --global alias.co checkout",
+        "retrieval_rank": 1,
+        "candidates": [
+          {
+            "quote": "$ git config --global alias.co checkout",
+            "page": 67,
+            "exact_gold": true
+          },
+          {
+            "quote": "$ git checkout -- CONTRIBUTING.md",
+            "page": 54,
+            "exact_gold": false
+          },
+          {
+            "quote": "If the file didn’t exist before, and you run git status, you see your untracked file like so: $ echo 'My Project' > README",
+            "page": 35,
+            "exact_gold": false
+          },
+          {
+            "quote": "In the last example output, the unstaged area looks like this: Changes not staged for commit: (use \"git add <file>...\" to update what will be committed) (use \"git checkout -- <file>...\" to discard changes in working directory) modified: CONTRIBUTING.md It tells you pretty explicitly how to discard the changes you’ve made.",
+            "page": 54,
+            "exact_gold": false
+          }
+        ],
+        "llm_answer": {
+          "quote": "In the last example output, the unstaged area looks like this: Changes not staged for commit: (use \"git add <file>...\" to update what will be committed) (use \"git checkout -- <file>...\" to discard changes in working directory) modified: CONTRIBUTING.md It tells you pretty explicitly how to discard the changes you’ve made.",
+          "page": 54,
+          "exact_gold": false
+        },
+        "lexical_answer": {
+          "quote": "$ git config --global alias.co checkout",
+          "page": 67,
+          "exact_gold": true
+        }
+      }
+    ]
+  }
+}
