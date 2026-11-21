@@ -20,6 +20,7 @@ def read(relative):
 def build():
     lora = read("task1_lora/results.json")
     rag = read("task2_rag/results.json")
+    evidence = read("task2_rag/evidence_results.json")
     local = read("task3_local/results.json")
     navy, teal, gray = "#12253B", "#006B63", "#506173"
     body = ParagraphStyle("Body", fontName="Helvetica", fontSize=10, leading=14,
@@ -136,6 +137,12 @@ def build():
       "which explains that the previous commit disappears from the branch history. "
       "The guard prevents unsupported wording, while relevance still depends on retrieval "
       "and quote selection.")
+    long = evidence["160"]
+    p(f"In a separate ablation, a local Llama trained on cloze examples from pages 101 onward "
+      f"chose among four source quotes. It returned the exact gold span for {long['llm_exact']}/15, "
+      f"versus {long['lexical_exact']}/15 by lexical ordering. Only {long['oracle_exact']}/15 "
+      "had an exact gold quote among the candidates. The lexical fallback remains in use. "
+      "Both tests reuse the development questions.")
     p("What BM25 and re-ranking add", section)
     p("BM25 rewards exact matches, with larger weights for uncommon terms, diminishing "
       "returns for repeated terms, and a length adjustment. This helps with command "
