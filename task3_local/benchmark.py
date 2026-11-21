@@ -96,6 +96,7 @@ def main():
     tokenizer = AutoTokenizer.from_pretrained(CACHE / "base")
     results = {key: {"file_bytes": (CACHE / f"commands-{key}.gguf").stat().st_size,
                      "peak_rss_kib": 0, "timing_runs": [], "samples": []} for key in KEYS}
+    # Alternate which format runs first so one format does not always get the cold start.
     for order in (KEYS, KEYS[::-1], KEYS):
         for key in order:
             result = results[key]
@@ -105,11 +106,13 @@ def main():
                     ids = request(endpoint, "/tokenize", {"content": prompt, "add_special": False})["tokens"]
                     assert ids == tokenizer.encode(prompt, add_special_tokens=False), (key, prompt)
                 complete(endpoint, "Git tracks changes to files.")
+                # Use the same output length when comparing decode speed.
                 for prompt, _ in PROMPTS:
                     timings = complete(endpoint, prompt)["timings"]
                     assert timings["predicted_n"] == 32 and timings["predicted_ms"] > 0, timings
                     timings_run.append(timings)
                 result["timing_runs"].append(timings_run)
+                # Score command quality separately and let the model stop naturally.
                 if not result["samples"]:
                     for prompt, expected in PROMPTS:
                         output = complete(endpoint, prompt, force_length=False)["content"]
